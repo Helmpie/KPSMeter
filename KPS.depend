@@ -1,0 +1,76 @@
+# depslib dependency file v1.0
+1524437835 source:c:\users\hein\documents\codeblocks projects\kps\inputhandler.cpp
+	"InputHandler.h"
+	"Settings.h"
+
+1524438275 c:\users\hein\documents\codeblocks projects\kps\inputhandler.h
+	<windows.h>
+	<cstdint>
+	<deque>
+	<string>
+	"WindowInterface.h"
+
+1524438234 source:c:\users\hein\documents\codeblocks projects\kps\main.cpp
+	<iostream>
+	<windows.h>
+	<stdio.h>
+	<Tchar.h>
+	<gdiplus.h>
+	"Settings.h"
+	"InputHandler.h"
+	"DrawFunctions.h"
+	"Graph.h"
+
+1512319350 source:c:\users\hein\documents\codeblocks projects\kps\calculatekps.cpp
+	"CalculateKPS.h"
+
+1512316308 c:\users\hein\documents\codeblocks projects\kps\calculatekps.h
+	<thread>
+	<stdio.h>
+	<iomanip>
+	"InputHandler.h"
+
+1524438029 c:\users\hein\documents\codeblocks projects\kps\windowinterface.h
+	<windows.h>
+
+1524438123 source:c:\users\hein\documents\codeblocks projects\kps\windowinterface.cpp
+	"WindowInterface.h"
+	<string>
+	"Settings.h"
+
+1524428373 source:c:\users\hein\documents\codeblocks projects\kps\drawfunctions.cpp
+	"DrawFunctions.h"
+	<windows.h>
+	<Gdiplus.h>
+	<string>
+	<deque>
+	<iostream>
+	"Settings.h"
+
+1524426050 c:\users\hein\documents\codeblocks projects\kps\drawfunctions.h
+	<windows.h>
+	<string>
+	<deque>
+	<gdiplus.h>
+
+1524433650 c:\users\hein\documents\codeblocks projects\kps\settings.h
+	"WindowInterface.h"
+
+1524434045 source:c:\users\hein\documents\codeblocks projects\kps\settings.cpp
+	"Settings.h"
+	"WindowInterface.h"
+	<iostream>
+	<fstream>
+	<string>
+
+1524437917 c:\users\hein\documents\codeblocks projects\kps\graph.h
+	"WindowInterface.h"
+	"InputHandler.h"
+	"Settings.h"
+	<deque>
+
+1524437379 source:c:\users\hein\documents\codeblocks projects\kps\graph.cpp
+	"Graph.h"
+	<iostream>
+	"DrawFunctions.h"
+

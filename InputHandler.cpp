@@ -37,8 +37,6 @@ void InputHandler::calculate_kps_apr()
     keycount = 0;
 
     if (kps > max_kps) {max_kps=kps;}
-
-    update_kps();
 }
 
 void InputHandler::calculate_kps_prec()
@@ -47,14 +45,12 @@ void InputHandler::calculate_kps_prec()
     key_que.pop_front();
     key_que.push_back(keycount);
     for (int i=0;i<deque_size;i++) { kps += key_que[i]; }
-    //std::cout << key_que.size() << std::endl;
+
     kps = kps/deque_div;
 
     keycount = 0;
 
     if (kps > max_kps) {max_kps=kps;}
-
-    update_kps();
 }
 
 int16_t InputHandler::getKeycount()
@@ -65,4 +61,22 @@ int16_t InputHandler::getKeycount()
 float InputHandler::getKps()
 {
     return kps;
+}
+
+std::string InputHandler::getKpsStr()
+{
+    std::string help_str = std::to_string(static_cast<int>(kps)) + "    ";
+    return help_str;
+}
+
+std::string InputHandler::getMaxKpsStr()
+{
+    std::string help_str = std::to_string(static_cast<int>(max_kps)) + "    ";
+    return help_str;
+}
+
+std::string InputHandler::getTotalKpsStr()
+{
+    std::string help_str = std::to_string(static_cast<int>(total_keys)) + "    ";
+    return help_str;
 }

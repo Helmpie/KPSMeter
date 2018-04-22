@@ -10,7 +10,7 @@
 #include "Graph.h"
 
 static InputHandler input;
-static Graph graph(&input);
+static Graph graph;
 
 const char g_szClassName1[] = "myWindowClass1";
 const char g_szClassName2[] = "myWindowClass2";
@@ -101,12 +101,12 @@ void CreateRightClickMenu(HWND &hwnd)
 
     // Show menu at mouse position
     TrackPopupMenu( hMenu,
-             TPM_RIGHTBUTTON,
-             p.x,
-             p.y,
-             0,
-             hwnd,
-             NULL);
+                    TPM_RIGHTBUTTON,
+                    p.x,
+                    p.y,
+                    0,
+                    hwnd,
+                    NULL);
 }
 
 // Callback function for main message loop
@@ -144,28 +144,6 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             static const char* max_txt = "max: ";
             static const char* tot_txt = "total: ";
 
-            /* Flicker code
-
-            static PAINTSTRUCT ps;
-            static HDC hdc;
-
-            hdc = BeginPaint(hwnd, &ps);
-
-            Draw::text(ps,hdc,colorWhite,colorBlack,hFont_l,10,5,140,70,kps_txt);
-            Draw::text(ps,hdc,colorWhite,colorBlack,hFont_s,10,70,140,110,max_txt);
-            Draw::text(ps,hdc,colorWhite,colorBlack,hFont_l,130,5,300,70,input.kps_str);
-            Draw::text(ps,hdc,colorWhite,colorBlack,hFont_s,100,70,300,110,input.max_kps_str);
-
-            if ( Settings::getInstance()->TotalKeysOn() )
-            {
-                Draw::text(ps,hdc,colorWhite,colorBlack,hFont_s,10,110,140,150,tot_txt);
-                Draw::text(ps,hdc,colorWhite,colorBlack,hFont_s,100,110,300,150,input.total_keys_str);
-            }
-
-            ::ReleaseDC(0,hdc);
-            EndPaint(hwnd, &ps);
-            */
-
             /* double buffering code @http://www.robertelder.ca/doublebuffering/ */
             PAINTSTRUCT ps;
             HDC Memhdc;
@@ -178,13 +156,13 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
             Draw::text(ps,Memhdc,colorWhite,colorBlack,hFont_l,10,5,140,70,kps_txt);
             Draw::text(ps,Memhdc,colorWhite,colorBlack,hFont_s,10,70,140,110,max_txt);
-            Draw::text(ps,Memhdc,colorWhite,colorBlack,hFont_l,130,5,300,70,input.kps_str);
-            Draw::text(ps,Memhdc,colorWhite,colorBlack,hFont_s,100,70,300,110,input.max_kps_str);
+            Draw::text(ps,Memhdc,colorWhite,colorBlack,hFont_l,130,5,300,70,input.getKpsStr().c_str());
+            Draw::text(ps,Memhdc,colorWhite,colorBlack,hFont_s,100,70,300,110,input.getMaxKpsStr().c_str());
 
             if ( Settings::getInstance()->TotalKeysOn() )
             {
                 Draw::text(ps,Memhdc,colorWhite,colorBlack,hFont_s,10,110,140,150,tot_txt);
-                Draw::text(ps,Memhdc,colorWhite,colorBlack,hFont_s,100,110,300,150,input.total_keys_str);
+                Draw::text(ps,Memhdc,colorWhite,colorBlack,hFont_s,100,110,300,150,input.getTotalKpsStr().c_str());
             }
 
             BitBlt(hdc, 0, 0,
@@ -302,8 +280,7 @@ LRESULT CALLBACK WndProcSec(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 HBITMAP Membitmap;
                 hdc = BeginPaint(hwnd, &ps);
                 Memhdc = CreateCompatibleDC(hdc);
-                //Membitmap = CreateCompatibleBitmap(hdc, win_width, win_height);               //black bg
-                Membitmap = (HBITMAP) CopyImage(graph_bg, IMAGE_BITMAP, 0, 0, LR_DEFAULTSIZE);  // copy from graph_bg
+                Membitmap = (HBITMAP) CopyImage(graph_bg, IMAGE_BITMAP, 0, 0, LR_DEFAULTSIZE);
                 SelectObject(Memhdc, Membitmap);
 
                 //drawing code goes in here
@@ -318,22 +295,13 @@ LRESULT CALLBACK WndProcSec(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 DeleteDC    (Memhdc);
                 DeleteDC    (hdc);
                 EndPaint(hwnd, &ps);
-
-                /* flicker code */
-                /*
-                static PAINTSTRUCT ps;
-                static HDC hdc;
-
-                hdc = BeginPaint(hwnd, &ps);
-                Draw::graph(hdc, graph.getDotPtr());
-
-                EndPaint(hwnd, &ps);
-                */
             }
             break;
         case WM_ERASEBKGND:
             return 1;
         case WM_CLOSE:
+            // Stop graph timer when exiting
+            KillTimer(hwnd,GRAPH_TIMER);
             DestroyWindow(hwnd);
             break;
         case WM_DESTROY:
@@ -370,24 +338,6 @@ LRESULT CALLBACK MyKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
     }
     return CallNextHookEx(NULL, nCode, wParam, lParam);
 }
-
-/*
-// Initializes static parts of window client area
-void InitWindow(HWND &hwnd)
-{
-    PAINTSTRUCT ps;
-    HDC hdc = GetDC(hwnd);
-
-    // draw 'kps: ' text
-    Draw::text(hwnd,ps,hdc,colorWhite,colorBlack,hFont_l,10,5,140,70,"kps: ");
-
-    // draw 'max: ' text
-    Draw::text(hwnd,ps,hdc,colorWhite,colorBlack,hFont_s,10,70,120,120,"max: ");
-
-    ::ReleaseDC(0,hdc);
-    EndPaint(hwnd, &ps);
-}
-*/
 
 bool makeWindow(WNDCLASSEX& wc,
                 HWND& hwnd,
@@ -469,10 +419,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     // Keyboard hook for registering key-down events while not in focus
     HHOOK KeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, MyKeyboardProc, 0, 0);
 
-    // Make windows known to objects
-    input.setWindow_ptr(&hwnd);
-    Settings::getInstance()->setWindow_ptr(&hwnd);
-    graph.setWindow_ptr(&hwnd2);
+    // Make windows known to Settings
+    Settings::getInstance()->setKPSWindow_ptr(&hwnd);
+    Settings::getInstance()->setGraphWindow_ptr(&hwnd2);
 
     // Init GDIPlus
     Gdiplus::GdiplusStartupInput gdiplusStartupInput;

@@ -2,8 +2,7 @@
 #include <iostream>
 #include "DrawFunctions.h"
 
-Graph::Graph(InputHandler* input)
-: input(input)
+Graph::Graph()
 {
     dots = std::deque<short>(Settings::getInstance()->getGraphPrecision(), 0);
 }

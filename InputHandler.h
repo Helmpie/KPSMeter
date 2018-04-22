@@ -4,13 +4,14 @@
 #include <windows.h>
 #include <cstdint>
 #include <deque>
+#include <string>
 
 #include "WindowInterface.h"
 
 static const int16_t deque_size = 14;
 static const float deque_div = ((float)deque_size)/10;
 
-class InputHandler : public WindowInterface
+class InputHandler
 {
     public:
         // Constructors and destructor
@@ -32,9 +33,17 @@ class InputHandler : public WindowInterface
         // Data access
         int16_t getKeycount();
         float getKps();
-        int getTimerInterval();
+
+        // String conversion
+        std::string getKpsStr();
+        std::string getMaxKpsStr();
+        std::string getTotalKpsStr();
 
     private:
+        float kps = 0; // result of calculation
+        float max_kps = 0; // highest keys per second
+        int total_keys = 0;
+
         int16_t keycount = 0; // number of key-presses registered by keydown();
         std::deque<unsigned char> key_que; // storage for Precision Mode;
 };

@@ -8,30 +8,21 @@
 class WindowInterface
 {
     public:
-        // Report keys per second to window
-        void update_kps();
-
         // Settings menu callbacks
         void toggle_window_on_top( bool set_on_top );
         void toggle_window_borders( bool set_border );
 
         // Data access
-        void setWindow_ptr(HWND* hwnd);
-        HWND* getWindow_ptr();
+        void setKPSWindow_ptr(HWND* hwnd);
+        HWND* getKPSWindow_ptr();
 
-        // Strings for display in window
-        const char* kps_str = "";
-        const char* max_kps_str = "";
-        const char* total_keys_str = "";
-
-    protected:
-        float kps = 0; // result of calculation
-        float max_kps = 0; // highest keys per second
-        int total_keys = 0;
-        HWND* window_ptr;
+        void setGraphWindow_ptr(HWND* hwnd);
+        HWND* getGraphWindow_ptr();
 
     private:
-         // registered window
+        // registered windows
+        HWND* kps_window_ptr;
+        HWND* graph_window_ptr;
 };
 
 #endif // WINDOWINTERFACE_H_INCLUDED

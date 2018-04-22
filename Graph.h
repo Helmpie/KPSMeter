@@ -7,10 +7,10 @@
 #include <deque>
 //static const short graph_precision = 100;
 
-class Graph : public WindowInterface
+class Graph
 {
     public:
-        Graph(InputHandler* input);
+        Graph();
         ~Graph();
 
         void addDot(const short& dot);
@@ -18,7 +18,6 @@ class Graph : public WindowInterface
         std::deque<short>* getDotPtr();
 
     private:
-        InputHandler* input;
         std::deque<short> dots;
 };
 

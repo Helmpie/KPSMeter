@@ -3,8 +3,7 @@
 
 #include <windows.h>
 
-// Interface class which holds calculation results
-// Can be accessed by registered window
+// This class has no reason to exist
 class WindowInterface
 {
     public:

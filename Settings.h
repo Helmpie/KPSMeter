@@ -16,6 +16,8 @@ class Settings : public WindowInterface
         bool b_total_keys_on = true;
         bool b_precision_mode = true;
 
+        bool b_generate_csv = false;
+
         short graph_update_rate;// = 350; // in milliseconds
         short graph_precision;// = 150;
         short graph_width;// = 400;
@@ -42,6 +44,9 @@ class Settings : public WindowInterface
         // Total keys
         void ToggleTotalKeys();
         bool TotalKeysOn();
+
+        void ToggleGenerateCSV();
+        bool getGenerateCSV();
 
         short getGraphPrecision();
         short getGraphWidth();

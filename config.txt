@@ -4,3 +4,4 @@ graph_precision = 150
 graph_width = 400
 graph_height = 225
 graph_top = 65
+generate_csv = 0

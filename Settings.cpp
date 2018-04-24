@@ -33,7 +33,7 @@ void Settings::ReadSettings()
     if(file_ini.is_open())
     {
         int i=0;
-        int settings[5];
+        int settings[6];
         while(getline(file_ini,line))
         {
             if(line[0]!='/')
@@ -49,6 +49,7 @@ void Settings::ReadSettings()
         graph_width = settings[2];
         graph_height = settings[3];
         graph_top = settings[4];
+        b_generate_csv = settings[5];
     }
     else
     {
@@ -128,6 +129,16 @@ void Settings::ToggleTotalKeys()
 bool Settings::TotalKeysOn()
 {
     return b_total_keys_on;
+}
+
+void Settings::ToggleGenerateCSV()
+{
+    b_generate_csv = !b_generate_csv;
+}
+
+bool Settings::getGenerateCSV()
+{
+    return b_generate_csv;
 }
 
 short Settings::getGraphPrecision()

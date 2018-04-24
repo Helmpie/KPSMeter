@@ -3,14 +3,17 @@
 #include <stdio.h>
 #include <Tchar.h>
 #include <gdiplus.h>
+#include <string>
 
 #include "Settings.h"
 #include "InputHandler.h"
 #include "DrawFunctions.h"
 #include "Graph.h"
+#include "Export.h"
 
 static InputHandler input;
 static Graph graph;
+static Export csv("kps.csv");
 
 const char g_szClassName1[] = "myWindowClass1";
 const char g_szClassName2[] = "myWindowClass2";
@@ -25,6 +28,7 @@ static HBITMAP graph_bg = (HBITMAP) LoadImage(0,_T("bg.bmp"),
 #define COMM_BORDER 2
 #define COMM_PREC 3
 #define COMM_TOT 4
+#define COMM_CSV 5
 
 // Timer ID
 const int KPS_TIMER = 1;
@@ -97,6 +101,15 @@ void CreateRightClickMenu(HWND &hwnd)
     else
     {
         ::AppendMenu(hMenu,MF_UNCHECKED,COMM_TOT,_T("Show Total Keys"));
+    }
+
+    if ( Settings::getInstance()->getGenerateCSV() )
+    {
+        ::AppendMenu(hMenu,MF_CHECKED,COMM_CSV,_T("Generate CSV file"));
+    }
+    else
+    {
+        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_CSV,_T("Generate CSV file"));
     }
 
     // Show menu at mouse position
@@ -216,6 +229,10 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     UpdateWindow (hwnd);
                     break;
 
+                case COMM_CSV:
+                    Settings::getInstance()->ToggleGenerateCSV();
+                    break;
+
                 default:
                     break;
             }
@@ -268,6 +285,11 @@ LRESULT CALLBACK WndProcSec(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         case WM_TIMER:
             // Update graph on timer end
             graph.addDot(input.getKps());
+
+            if(Settings::getInstance()->getGenerateCSV())
+            {
+                csv.WriteToCSV(std::to_string((int)input.getKps()));
+            }
 
             InvalidateRect(hwnd, NULL, TRUE);
             break;

@@ -1,10 +1,11 @@
 #include "Export.h"
 #include <iostream>
+#include <ctime>
 
 Export::Export(const std::string& filename)
 {
     file.open(filename);
-    file << "\n0";
+    file << "KPS, Timestamps\n";
 }
 
 Export::~Export()
@@ -14,6 +15,8 @@ Export::~Export()
 
 void Export::WriteToCSV(const std::string& data)
 {
-    file << ",";
     file << data;
+    file << ",";
+    file << 0;
+    file << "\n";
 }

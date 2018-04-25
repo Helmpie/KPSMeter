@@ -44,6 +44,8 @@
 		</Linker>
 		<Unit filename="DrawFunctions.cpp" />
 		<Unit filename="DrawFunctions.h" />
+		<Unit filename="Export.cpp" />
+		<Unit filename="Export.h" />
 		<Unit filename="Graph.cpp" />
 		<Unit filename="Graph.h" />
 		<Unit filename="InputHandler.cpp" />

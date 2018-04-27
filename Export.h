@@ -7,12 +7,17 @@
 class Export
 {
     public:
-        Export(const std::string& file);
+        Export();
         ~Export();
 
-        void WriteToCSV(const std::string& data);
+        void openCSV();
+        void closeCSV();
+
+        void UpdateAverage(const float& data);
+        void WriteToCSV();
 
     private:
+        short total = 0;
         std::ofstream file;
 };
 

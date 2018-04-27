@@ -1,7 +1,10 @@
 // todo: write better read function
 graph_update_rate = 350
-graph_precision = 150
-graph_width = 400
+graph_precision = 200
+graph_width = 800
 graph_height = 225
 graph_top = 65
 generate_csv = 0
+csv_update_rate = 5000
+calc_queue_size = 20
+calc_update_rate = 50

@@ -2,8 +2,15 @@
 
 #include "Settings.h"
 
+#include <iomanip>
+#include <iostream>
+#include <cmath>
+
 InputHandler::InputHandler()
 {
+    deque_size = Settings::getInstance()->getCalcQueueSize();
+    deque_div = (float)deque_size / (1000/(float)Settings::getInstance()->getCalcUpdateRate());
+
     // init key_que
     for (int i=0;i<deque_size;i++) { key_que.push_back(0); }
 }
@@ -42,15 +49,22 @@ void InputHandler::calculate_kps_apr()
 void InputHandler::calculate_kps_prec()
 {
     kps = 0;
-    key_que.pop_front();
-    key_que.push_back(keycount);
-    for (int i=0;i<deque_size;i++) { kps += key_que[i]; }
+    key_que.pop_back();
+    key_que.push_front(keycount);
+
+    for (int i=0;i<deque_size;i++)
+    {
+        kps += key_que[i];
+    }
 
     kps = kps/deque_div;
 
     keycount = 0;
 
-    if (kps > max_kps) {max_kps=kps;}
+    if (kps > max_kps)
+    {
+        max_kps=kps;
+    }
 }
 
 int16_t InputHandler::getKeycount()
@@ -65,18 +79,24 @@ float InputHandler::getKps()
 
 std::string InputHandler::getKpsStr()
 {
-    std::string help_str = std::to_string(static_cast<int>(kps)) + "    ";
-    return help_str;
+    if(Settings::getInstance()->DecimalPointOn())
+    {
+        std::stringstream ss;
+        ss << std::fixed << std::setprecision(1) << kps << "    ";
+        return ss.str();
+    }
+    else
+    {
+        return std::to_string((int)ceil(kps)) + "    ";
+    }
 }
 
 std::string InputHandler::getMaxKpsStr()
 {
-    std::string help_str = std::to_string(static_cast<int>(max_kps)) + "    ";
-    return help_str;
+    return std::to_string((int)ceil(max_kps)) + "    ";
 }
 
 std::string InputHandler::getTotalKpsStr()
 {
-    std::string help_str = std::to_string(static_cast<int>(total_keys)) + "    ";
-    return help_str;
+    return std::to_string(total_keys) + "    ";
 }

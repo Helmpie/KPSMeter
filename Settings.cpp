@@ -33,7 +33,7 @@ void Settings::ReadSettings()
     if(file_ini.is_open())
     {
         int i=0;
-        int settings[6];
+        int settings[9];
         while(getline(file_ini,line))
         {
             if(line[0]!='/')
@@ -50,6 +50,10 @@ void Settings::ReadSettings()
         graph_height = settings[3];
         graph_top = settings[4];
         b_generate_csv = settings[5];
+        csv_update_rate = settings[6];
+        calc_queue_size = settings[7];
+        calc_update_rate = settings[8];
+
     }
     else
     {
@@ -59,76 +63,98 @@ void Settings::ReadSettings()
     file_ini.close();
 }
 
-void Settings::ToggleAlwaysOnTop()
+void Settings::ToggleKPSAlwaysOnTop()
 {
-    if (!b_always_on_top)
+    b_kps_always_on_top = !b_kps_always_on_top;
+    /*
+    if (!b_kps_always_on_top)
     {
         toggle_window_on_top(true);
-        b_always_on_top = true;
+        b_kps_always_on_top = true;
     }
     else
     {
         toggle_window_on_top(false);
-        b_always_on_top = false;
+        b_kps_always_on_top = false;
     }
+    */
 }
 
-bool Settings::WindowIsAOT()
+bool Settings::KPSWindowIsAOT()
 {
-    return b_always_on_top;
+    return b_kps_always_on_top;
 }
 
-void Settings::ToggleWindowBorders()
+void Settings::ToggleKPSWindowBorders()
 {
-    if (!b_window_has_borders)
+    b_kps_window_has_borders = !b_kps_window_has_borders;
+    /*
+    if (!b_kps_window_has_borders)
     {
         toggle_window_borders(true);
-        b_window_has_borders = true;
+        b_kps_window_has_borders = true;
     }
     else
     {
         toggle_window_borders(false);
-        b_window_has_borders = false;
+        b_kps_window_has_borders = false;
     }
+    */
 }
 
-bool Settings::WindowHasBorders()
+bool Settings::KPSWindowHasBorders()
 {
-    return b_window_has_borders;
+    return b_kps_window_has_borders;
+}
+
+void Settings::ToggleGraphAlwaysOnTop()
+{
+    b_graph_always_on_top = !b_graph_always_on_top;
+}
+
+bool Settings::GraphWindowIsAOT()
+{
+    return b_graph_always_on_top;
+}
+
+void Settings::ToggleGraphWindowBorders()
+{
+    b_graph_window_has_borders = !b_graph_window_has_borders;
+}
+
+bool Settings::GraphWindowHasBorders()
+{
+    return b_graph_window_has_borders;
 }
 
 void Settings::TogglePrecisionMode()
 {
-    if (!b_precision_mode)
-    {
-        b_precision_mode = true;
-    }
-    else
-    {
-        b_precision_mode = false;
-    }
+    b_kps_precision_mode = !b_kps_precision_mode;
 }
 
 bool Settings::PrecisionModeOn()
 {
-    return b_precision_mode;
+    return b_kps_precision_mode;
 }
 
 void Settings::ToggleTotalKeys()
 {
-    if (!b_total_keys_on)
-    {
-        b_total_keys_on = true;
-    }
-    else
-    {
-        b_total_keys_on = false;
-    }
+    b_kps_total_keys_on = !b_kps_total_keys_on;
 }
 
 bool Settings::TotalKeysOn()
 {
-    return b_total_keys_on;
+    return b_kps_total_keys_on;
+}
+
+void Settings::ToggleDecimalPoint()
+{
+    b_kps_decimal_point = !b_kps_decimal_point;
+}
+
+bool Settings::DecimalPointOn()
+{
+    return b_kps_decimal_point;
 }
 
 void Settings::ToggleGenerateCSV()
@@ -139,6 +165,21 @@ void Settings::ToggleGenerateCSV()
 bool Settings::getGenerateCSV()
 {
     return b_generate_csv;
+}
+
+short Settings::getCSVUpdateRate()
+{
+    return csv_update_rate;
+}
+
+short Settings::getCalcQueueSize()
+{
+    return calc_queue_size;
+}
+
+short Settings::getCalcUpdateRate()
+{
+    return calc_update_rate;
 }
 
 short Settings::getGraphPrecision()

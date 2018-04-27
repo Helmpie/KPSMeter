@@ -5,15 +5,9 @@
 #include <string>
 #include <deque>
 #include <iostream>
+
+#include "Constants.h"
 #include "Settings.h"
-
-const short width = Settings::getInstance()->getGraphWidth();
-const short height = Settings::getInstance()->getGraphHeight()+5;
-const short precision = Settings::getInstance()->getGraphPrecision();
-const short graph_top = Settings::getInstance()->getGraphTop();
-
-const float w_factor = (float)width/precision;
-const float h_factor = (float)height/graph_top;
 
 void Draw::text(PAINTSTRUCT &ps,
                 HDC &hdc,
@@ -81,5 +75,4 @@ void Draw::graph(HDC &hdc,
                           (i+1)*w_factor, // X2
                           height-(*dots)[i+1]*h_factor); // Y2
     }
-    //std::cout << GetLastError() << "|";
 }

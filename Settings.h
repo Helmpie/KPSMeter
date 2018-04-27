@@ -11,13 +11,26 @@ class Settings : public WindowInterface
         Settings();
         ~Settings();
 
-        bool b_always_on_top = false;
-        bool b_window_has_borders = true;
-        bool b_total_keys_on = true;
-        bool b_precision_mode = true;
+        // KPS window settings
+        bool b_kps_always_on_top = false;
+        bool b_kps_window_has_borders = true;
+        bool b_kps_total_keys_on = true;
+        bool b_kps_precision_mode = true;
+        bool b_kps_decimal_point = false;
 
+        // Graph window settings
+        bool b_graph_always_on_top = false;
+        bool b_graph_window_has_borders = true;
+
+        // Calculation settings
+        short calc_queue_size;// = 14;
+        short calc_update_rate;// = 100;
+
+        // CSV settings
         bool b_generate_csv = false;
+        short csv_update_rate;
 
+        // Graph settings
         short graph_update_rate;// = 350; // in milliseconds
         short graph_precision;// = 150;
         short graph_width;// = 400;
@@ -30,12 +43,18 @@ class Settings : public WindowInterface
         static Settings* getInstance();
 
         // Window always on top
-        void ToggleAlwaysOnTop();
-        bool WindowIsAOT();
+        void ToggleKPSAlwaysOnTop();
+        bool KPSWindowIsAOT();
+
+        void ToggleGraphAlwaysOnTop();
+        bool GraphWindowIsAOT();
 
         // Borderless window
-        void ToggleWindowBorders();
-        bool WindowHasBorders();
+        void ToggleKPSWindowBorders();
+        bool KPSWindowHasBorders();
+
+        void ToggleGraphWindowBorders();
+        bool GraphWindowHasBorders();
 
         // Precision mode
         void TogglePrecisionMode();
@@ -45,8 +64,16 @@ class Settings : public WindowInterface
         void ToggleTotalKeys();
         bool TotalKeysOn();
 
+        void ToggleDecimalPoint();
+        bool DecimalPointOn();
+
         void ToggleGenerateCSV();
         bool getGenerateCSV();
+
+        short getCSVUpdateRate();
+
+        short getCalcQueueSize();
+        short getCalcUpdateRate();
 
         short getGraphPrecision();
         short getGraphWidth();

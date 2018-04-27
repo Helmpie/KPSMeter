@@ -5,11 +5,14 @@
 #include <cstdint>
 #include <deque>
 #include <string>
+#include <sstream>
 
 #include "WindowInterface.h"
+#include "Settings.h"
 
+//static const int16_t deque_size = Settings::getInstance()->getCalcPrecision();//14;
 static const int16_t deque_size = 14;
-static const float deque_div = ((float)deque_size)/10;
+//static const float deque_div = ((float)deque_size)/10;
 
 class InputHandler
 {
@@ -46,6 +49,9 @@ class InputHandler
 
         int16_t keycount = 0; // number of key-presses registered by keydown();
         std::deque<unsigned char> key_que; // storage for Precision Mode;
+
+        short deque_size;
+        float deque_div;
 };
 
 #endif // INPUTHANDLER_H_INCLUDED

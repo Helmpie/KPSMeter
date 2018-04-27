@@ -5,56 +5,31 @@
 #include <gdiplus.h>
 #include <string>
 
+#include "Constants.h"
+#include "WinAPI.h"
 #include "Settings.h"
 #include "InputHandler.h"
 #include "DrawFunctions.h"
 #include "Graph.h"
 #include "Export.h"
+#include "Web.h"
 
 static InputHandler input;
 static Graph graph;
-static Export csv("kps.csv");
+static Export csv;
+static Web web;
 
-const char g_szClassName1[] = "myWindowClass1";
-const char g_szClassName2[] = "myWindowClass2";
-
-// Graph background
-static HBITMAP graph_bg = (HBITMAP) LoadImage(0,_T("bg.bmp"),
-                                              IMAGE_BITMAP,0,0,
-                                              LR_CREATEDIBSECTION|LR_LOADFROMFILE);
-
-// Commands for right click menu;
-#define COMM_AOT 1
-#define COMM_BORDER 2
-#define COMM_PREC 3
-#define COMM_TOT 4
-#define COMM_CSV 5
-
-// Timer ID
+// Timers
 const int KPS_TIMER = 1;
 const int GRAPH_TIMER = 2;
+const int CSV_TIMER = 3;
 
-typedef LRESULT CALLBACK (*callback_ptr)(HWND,UINT,WPARAM,LPARAM);
+// Graph background
+HBITMAP graph_bg = (HBITMAP) LoadImage(0,_T("bg.bmp"),
+                                       IMAGE_BITMAP,0,0,
+                                       LR_CREATEDIBSECTION|LR_LOADFROMFILE);
 
-struct windowInformation
-{
-    int width;
-    int height;
-    const char* g_szClassName;
-    const char* title;
-    const char* bg;
-    callback_ptr WndProc;
-
-    windowInformation(int width,
-                      int height,
-                      const char* g_szClassName,
-                      const char* title,
-                      const char* bg,
-                      callback_ptr WndProc)
-    : width(width), height(height), g_szClassName(g_szClassName), title(title), bg(bg), WndProc(WndProc)  {}
-};
-
-void CreateRightClickMenu(HWND &hwnd)
+void CreateRightClickMenuKPS(HWND &hwnd)
 {
     // Determine cursor position
     POINT p;
@@ -63,10 +38,8 @@ void CreateRightClickMenu(HWND &hwnd)
     // Create dropdown list
     HMENU hMenu = CreatePopupMenu();
 
-    // Add buttons to list
-
-    // Checkbox for window always on top
-    if ( Settings::getInstance()->WindowIsAOT() )
+    // Add buttons
+    if ( Settings::getInstance()->KPSWindowIsAOT() )
     {
         ::AppendMenu(hMenu,MF_CHECKED,COMM_AOT,_T("Always on top"));
     }
@@ -75,8 +48,7 @@ void CreateRightClickMenu(HWND &hwnd)
         ::AppendMenu(hMenu,MF_UNCHECKED,COMM_AOT,_T("Always on top"));
     }
 
-    // Checkbox for borderless window
-    if ( Settings::getInstance()->WindowHasBorders() )
+    if ( Settings::getInstance()->KPSWindowHasBorders() )
     {
         ::AppendMenu(hMenu,MF_UNCHECKED,COMM_BORDER,_T("Borderless"));
     }
@@ -112,6 +84,53 @@ void CreateRightClickMenu(HWND &hwnd)
         ::AppendMenu(hMenu,MF_UNCHECKED,COMM_CSV,_T("Generate CSV file"));
     }
 
+    if ( Settings::getInstance()->DecimalPointOn() )
+    {
+        ::AppendMenu(hMenu,MF_CHECKED,COMM_DEC,_T("Show Decimal Point"));
+    }
+    else
+    {
+        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_DEC,_T("Show Decimal Point"));
+    }
+
+    // Show menu at mouse position
+    TrackPopupMenu( hMenu,
+                    TPM_RIGHTBUTTON,
+                    p.x,
+                    p.y,
+                    0,
+                    hwnd,
+                    NULL);
+}
+
+void CreateRightClickMenuGraph(HWND &hwnd)
+{
+    // Determine cursor position
+    POINT p;
+    GetCursorPos(&p);
+
+    // Create dropdown list
+    HMENU hMenu = CreatePopupMenu();
+
+    // Add buttons
+    if ( Settings::getInstance()->GraphWindowIsAOT() )
+    {
+        ::AppendMenu(hMenu,MF_CHECKED,COMM_AOT,_T("Always on top"));
+    }
+    else
+    {
+        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_AOT,_T("Always on top"));
+    }
+
+    if ( Settings::getInstance()->GraphWindowHasBorders() )
+    {
+        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_BORDER,_T("Borderless"));
+    }
+    else
+    {
+        ::AppendMenu(hMenu,MF_CHECKED,COMM_BORDER,_T("Borderless"));
+    }
+
     // Show menu at mouse position
     TrackPopupMenu( hMenu,
                     TPM_RIGHTBUTTON,
@@ -125,38 +144,38 @@ void CreateRightClickMenu(HWND &hwnd)
 // Callback function for main message loop
 LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    /* DEBUG */
-    //if ( msg!= WM_PAINT ) { std::cout << msg << std::endl; }
-
     switch(msg)
     {
         case WM_TIMER:
-            // Update kps on timer end
-            if (Settings::getInstance()->PrecisionModeOn())
+            switch (wParam)
             {
-                input.calculate_kps_prec();
-            }
-            else
-            {
-                input.calculate_kps_apr();
-            }
+                case KPS_TIMER:
+                    if (Settings::getInstance()->PrecisionModeOn())
+                    {
+                        input.calculate_kps_prec();
+                    }
+                    else
+                    {
+                        input.calculate_kps_apr();
+                    }
 
-            InvalidateRect(hwnd,NULL,FALSE);
+                    if(Settings::getInstance()->getGenerateCSV())
+                    {
+                        csv.UpdateAverage(input.getKps());
+                    }
+
+                    InvalidateRect(hwnd,NULL,FALSE);
+                    break;
+                case CSV_TIMER:
+                    if(Settings::getInstance()->getGenerateCSV())
+                    {
+                        csv.WriteToCSV();
+                    }
+                    break;
+            }
             break;
         case WM_PAINT:
         {
-            static const COLORREF colorWhite = RGB(255, 255, 255);
-            static const COLORREF colorBlack = RGB(0, 0, 0);
-
-            static const HFONT hFont_l = CreateFont(70, 0, 0, 0, FW_BOLD, 0, 0, 0, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
-                                           CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_SWISS, _T("Bahnschrift Light"));
-            static const HFONT hFont_s = CreateFont(40, 0, 0, 0, FW_BOLD, 0, 0, 0, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
-                                           CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_SWISS, _T("Bahnschrift Light"));
-
-            static const char* kps_txt = "kps: ";
-            static const char* max_txt = "max: ";
-            static const char* tot_txt = "total: ";
-
             /* double buffering code @http://www.robertelder.ca/doublebuffering/ */
             PAINTSTRUCT ps;
             HDC Memhdc;
@@ -164,7 +183,7 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             HBITMAP Membitmap;
             hdc = BeginPaint(hwnd, &ps);
             Memhdc = CreateCompatibleDC(hdc);
-            Membitmap = CreateCompatibleBitmap(hdc, 240, 207);
+            Membitmap = CreateCompatibleBitmap(hdc, 265, 265);
             SelectObject(Memhdc, Membitmap);
 
             Draw::text(ps,Memhdc,colorWhite,colorBlack,hFont_l,10,5,140,70,kps_txt);
@@ -179,8 +198,8 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             }
 
             BitBlt(hdc, 0, 0,
-                   240,
-                   207,
+                   265,
+                   265,
                    Memhdc, 0, 0, SRCCOPY);
 
             DeleteObject(Membitmap);
@@ -196,7 +215,7 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
         case WM_CONTEXTMENU:
         {
-            CreateRightClickMenu(hwnd);
+            CreateRightClickMenuKPS(hwnd);
 
             // Send command back to message loop
             PostMessage(hwnd, WM_NULL, 0, 0);
@@ -212,11 +231,13 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             switch (command)
             {
                 case COMM_AOT:
-                    Settings::getInstance()->ToggleAlwaysOnTop();
+                    Settings::getInstance()->ToggleKPSAlwaysOnTop();
+                    Settings::getInstance()->toggle_window_on_top(hwnd, Settings::getInstance()->KPSWindowIsAOT());
                     break;
 
                 case COMM_BORDER:
-                    Settings::getInstance()->ToggleWindowBorders();
+                    Settings::getInstance()->ToggleKPSWindowBorders();
+                    Settings::getInstance()->toggle_window_borders(hwnd, Settings::getInstance()->KPSWindowHasBorders());
                     break;
 
                 case COMM_PREC:
@@ -230,7 +251,21 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     break;
 
                 case COMM_CSV:
+                    if(!Settings::getInstance()->getGenerateCSV())
+                    {
+                        SetTimer(hwnd, CSV_TIMER, Settings::getInstance()->getCSVUpdateRate(), NULL);
+                        csv.openCSV();
+                    }
+                    else
+                    {
+                        KillTimer(hwnd, CSV_TIMER);
+                        csv.closeCSV();
+                    }
                     Settings::getInstance()->ToggleGenerateCSV();
+                    break;
+
+                case COMM_DEC:
+                    Settings::getInstance()->ToggleDecimalPoint();
                     break;
 
                 default:
@@ -283,15 +318,16 @@ LRESULT CALLBACK WndProcSec(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     switch(msg)
     {
         case WM_TIMER:
-            // Update graph on timer end
-            graph.addDot(input.getKps());
+            //switch (wParam)
+            //{
+            //    case GRAPH_TIMER:
+                    graph.addDot(input.getKps());
 
-            if(Settings::getInstance()->getGenerateCSV())
-            {
-                csv.WriteToCSV(std::to_string((int)input.getKps()));
-            }
+                    InvalidateRect(hwnd, NULL, TRUE);
+            //        break;
 
-            InvalidateRect(hwnd, NULL, TRUE);
+            //}
+
             break;
         case WM_PAINT:
             {
@@ -321,6 +357,39 @@ LRESULT CALLBACK WndProcSec(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             break;
         case WM_ERASEBKGND:
             return 1;
+
+        case WM_CONTEXTMENU:
+            {
+                CreateRightClickMenuGraph(hwnd);
+
+                // Send command back to message loop
+                PostMessage(hwnd, WM_NULL, 0, 0);
+
+                break;
+            }
+
+        case WM_COMMAND:
+            {
+                // Handle command from right click menu
+                WORD command = LOWORD(wParam);
+
+                switch (command)
+                {
+                    case COMM_AOT:
+                        Settings::getInstance()->ToggleGraphAlwaysOnTop();
+                        Settings::getInstance()->toggle_window_on_top(hwnd, Settings::getInstance()->GraphWindowIsAOT());
+                        break;
+
+                    case COMM_BORDER:
+                        Settings::getInstance()->ToggleGraphWindowBorders();
+                        Settings::getInstance()->toggle_window_borders(hwnd, Settings::getInstance()->GraphWindowHasBorders());
+                        break;
+
+                    default:
+                        break;
+                }
+                break;
+            }
         case WM_CLOSE:
             // Stop graph timer when exiting
             KillTimer(hwnd,GRAPH_TIMER);
@@ -361,65 +430,16 @@ LRESULT CALLBACK MyKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
     return CallNextHookEx(NULL, nCode, wParam, lParam);
 }
 
-bool makeWindow(WNDCLASSEX& wc,
-                HWND& hwnd,
-                MSG& Msg,
-                HINSTANCE& hInstance,
-                windowInformation& wi)
-{
-    // Registering the Window Class
-    wc.cbSize        = sizeof(WNDCLASSEX);
-    wc.style         = 0;
-    wc.lpfnWndProc   = wi.WndProc;
-    wc.cbClsExtra    = 0;
-    wc.cbWndExtra    = 0;
-    wc.hInstance     = hInstance;
-    wc.hIcon         = LoadIcon(NULL, IDI_APPLICATION);
-    wc.hCursor       = LoadCursor(NULL, IDC_ARROW);
-    //wc.hbrBackground = CreateSolidBrush(RGB(0, 0, 0));
-    wc.hbrBackground = CreatePatternBrush((HBITMAP) LoadImage(0,_T(wi.bg),
-                                          IMAGE_BITMAP,0,0,
-                                          LR_CREATEDIBSECTION|LR_LOADFROMFILE));
-    wc.lpszMenuName  = NULL;
-    wc.lpszClassName = wi.g_szClassName;
-    wc.hIconSm       = LoadIcon(NULL, IDI_APPLICATION);
-
-    if(!RegisterClassEx(&wc))
-    {
-        MessageBox(NULL, "Window Registration Failed!", "Error!",
-            MB_ICONEXCLAMATION | MB_OK);
-        return 0;
-    }
-
-    // Creating the Window
-    hwnd = CreateWindowEx(
-        WS_EX_CLIENTEDGE,
-        wi.g_szClassName,
-        wi.title,
-        WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, CW_USEDEFAULT, wi.width, wi.height,
-        NULL, NULL, hInstance, NULL);
-
-    if(hwnd == NULL)
-    {
-        MessageBox(NULL, "Window Creation Failed!", "Error!",
-            MB_ICONEXCLAMATION | MB_OK);
-        return 0;
-    }
-
-    return 1;
-}
-
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     LPSTR lpCmdLine, int nCmdShow)
 {
     WNDCLASSEX wc, wc2;
     HWND hwnd, hwnd2;
-    MSG Msg, Msg2;
+    MSG Msg;
 
     // Make main window
-    windowInformation wi_1(240, 200, g_szClassName1, "KPS", "empty.bmp", WndProcPrim);
-    if(!makeWindow(wc, hwnd, Msg, hInstance, wi_1))
+    windowInformation wi_1(265, 200, g_szClassName1, "KPS", "", WndProcPrim);
+    if(!WinAPI::MakeWindow(wc, hwnd, Msg, hInstance, wi_1))
     {
         return 0;
     }
@@ -428,10 +448,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     UpdateWindow(hwnd);
 
     // Make graph window
-    windowInformation wi_2(Settings::getInstance()->getGraphWidth()+20,
-                           Settings::getInstance()->getGraphHeight()+50,
+    windowInformation wi_2(Settings::getInstance()->getGraphWidth(),
+                           Settings::getInstance()->getGraphHeight()+40,
                            g_szClassName2, "Graph", "bg.bmp", WndProcSec);
-    if(!makeWindow(wc2, hwnd2, Msg, hInstance, wi_2))
+    if(!WinAPI::MakeWindow(wc2, hwnd2, Msg, hInstance, wi_2))
     {
         return 0;
     }
@@ -439,11 +459,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     UpdateWindow(hwnd2);
 
     // Keyboard hook for registering key-down events while not in focus
-    HHOOK KeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, MyKeyboardProc, 0, 0);
-
-    // Make windows known to Settings
-    Settings::getInstance()->setKPSWindow_ptr(&hwnd);
-    Settings::getInstance()->setGraphWindow_ptr(&hwnd2);
+    SetWindowsHookEx(WH_KEYBOARD_LL, MyKeyboardProc, 0, 0);
 
     // Init GDIPlus
     Gdiplus::GdiplusStartupInput gdiplusStartupInput;
@@ -451,7 +467,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
     // Start timers
-    SetTimer(hwnd, KPS_TIMER, 100, NULL);
+    SetTimer(hwnd, KPS_TIMER, Settings::getInstance()->getCalcUpdateRate(), NULL);
     SetTimer(hwnd2, GRAPH_TIMER, Settings::getInstance()->getGraphUpdateRate(), NULL);
 
     //  Message Loop

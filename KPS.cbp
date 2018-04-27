@@ -58,6 +58,8 @@
 		<Unit filename="InetError.h" />
 		<Unit filename="InputHandler.cpp" />
 		<Unit filename="InputHandler.h" />
+		<Unit filename="Lib.cpp" />
+		<Unit filename="Lib.h" />
 		<Unit filename="Settings.cpp" />
 		<Unit filename="Settings.h" />
 		<Unit filename="Web.cpp" />

@@ -82,21 +82,21 @@ std::string InputHandler::getKpsStr()
     if(Settings::getInstance()->DecimalPointOn())
     {
         std::stringstream ss;
-        ss << std::fixed << std::setprecision(1) << kps << "    ";
+        ss << std::fixed << std::setprecision(1) << kps;
         return ss.str();
     }
     else
     {
-        return std::to_string((int)ceil(kps)) + "    ";
+        return std::to_string((int)ceil(kps));
     }
 }
 
 std::string InputHandler::getMaxKpsStr()
 {
-    return std::to_string((int)ceil(max_kps)) + "    ";
+    return std::to_string((int)ceil(max_kps));
 }
 
 std::string InputHandler::getTotalKpsStr()
 {
-    return std::to_string(total_keys) + "    ";
+    return std::to_string(total_keys);
 }

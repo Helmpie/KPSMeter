@@ -25,121 +25,9 @@ const int GRAPH_TIMER = 2;
 const int CSV_TIMER = 3;
 
 // Graph background
-HBITMAP graph_bg = (HBITMAP) LoadImage(0,_T("bg.bmp"),
+static HBITMAP graph_bg = (HBITMAP) LoadImage(0,_T("bg.bmp"),
                                        IMAGE_BITMAP,0,0,
                                        LR_CREATEDIBSECTION|LR_LOADFROMFILE);
-
-void CreateRightClickMenuKPS(HWND &hwnd)
-{
-    // Determine cursor position
-    POINT p;
-    GetCursorPos(&p);
-
-    // Create dropdown list
-    HMENU hMenu = CreatePopupMenu();
-
-    // Add buttons
-    if ( Settings::getInstance()->KPSWindowIsAOT() )
-    {
-        ::AppendMenu(hMenu,MF_CHECKED,COMM_AOT,_T("Always on top"));
-    }
-    else
-    {
-        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_AOT,_T("Always on top"));
-    }
-
-    if ( Settings::getInstance()->KPSWindowHasBorders() )
-    {
-        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_BORDER,_T("Borderless"));
-    }
-    else
-    {
-        ::AppendMenu(hMenu,MF_CHECKED,COMM_BORDER,_T("Borderless"));
-    }
-
-    if ( Settings::getInstance()->PrecisionModeOn() )
-    {
-        ::AppendMenu(hMenu,MF_CHECKED,COMM_PREC,_T("Precision Mode"));
-    }
-    else
-    {
-        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_PREC,_T("Precision Mode"));
-    }
-
-    if ( Settings::getInstance()->TotalKeysOn() )
-    {
-        ::AppendMenu(hMenu,MF_CHECKED,COMM_TOT,_T("Show Total Keys"));
-    }
-    else
-    {
-        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_TOT,_T("Show Total Keys"));
-    }
-
-    if ( Settings::getInstance()->getGenerateCSV() )
-    {
-        ::AppendMenu(hMenu,MF_CHECKED,COMM_CSV,_T("Generate CSV file"));
-    }
-    else
-    {
-        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_CSV,_T("Generate CSV file"));
-    }
-
-    if ( Settings::getInstance()->DecimalPointOn() )
-    {
-        ::AppendMenu(hMenu,MF_CHECKED,COMM_DEC,_T("Show Decimal Point"));
-    }
-    else
-    {
-        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_DEC,_T("Show Decimal Point"));
-    }
-
-    // Show menu at mouse position
-    TrackPopupMenu( hMenu,
-                    TPM_RIGHTBUTTON,
-                    p.x,
-                    p.y,
-                    0,
-                    hwnd,
-                    NULL);
-}
-
-void CreateRightClickMenuGraph(HWND &hwnd)
-{
-    // Determine cursor position
-    POINT p;
-    GetCursorPos(&p);
-
-    // Create dropdown list
-    HMENU hMenu = CreatePopupMenu();
-
-    // Add buttons
-    if ( Settings::getInstance()->GraphWindowIsAOT() )
-    {
-        ::AppendMenu(hMenu,MF_CHECKED,COMM_AOT,_T("Always on top"));
-    }
-    else
-    {
-        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_AOT,_T("Always on top"));
-    }
-
-    if ( Settings::getInstance()->GraphWindowHasBorders() )
-    {
-        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_BORDER,_T("Borderless"));
-    }
-    else
-    {
-        ::AppendMenu(hMenu,MF_CHECKED,COMM_BORDER,_T("Borderless"));
-    }
-
-    // Show menu at mouse position
-    TrackPopupMenu( hMenu,
-                    TPM_RIGHTBUTTON,
-                    p.x,
-                    p.y,
-                    0,
-                    hwnd,
-                    NULL);
-}
 
 // Callback function for main message loop
 LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -215,7 +103,7 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
         case WM_CONTEXTMENU:
         {
-            CreateRightClickMenuKPS(hwnd);
+            WinAPI::CreateRightClickMenuKPS(hwnd);
 
             // Send command back to message loop
             PostMessage(hwnd, WM_NULL, 0, 0);
@@ -262,6 +150,18 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         csv.closeCSV();
                     }
                     Settings::getInstance()->ToggleGenerateCSV();
+                    break;
+
+                case COMM_SHR:
+                    if(!Settings::getInstance()->ShareDataOn())
+                    {
+                        web.OpenConnect();
+                    }
+                    else
+                    {
+                        web.Close();
+                    }
+                    Settings::getInstance()->ToggleShareData();
                     break;
 
                 case COMM_DEC:
@@ -360,7 +260,7 @@ LRESULT CALLBACK WndProcSec(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
         case WM_CONTEXTMENU:
             {
-                CreateRightClickMenuGraph(hwnd);
+                WinAPI::CreateRightClickMenuGraph(hwnd);
 
                 // Send command back to message loop
                 PostMessage(hwnd, WM_NULL, 0, 0);
@@ -438,7 +338,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     MSG Msg;
 
     // Make main window
-    windowInformation wi_1(265, 200, g_szClassName1, "KPS", "", WndProcPrim);
+    windowInformation wi_1(265, 200, g_szClassName1, "KPS", NULL, WndProcPrim);
+
     if(!WinAPI::MakeWindow(wc, hwnd, Msg, hInstance, wi_1))
     {
         return 0;
@@ -451,6 +352,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     windowInformation wi_2(Settings::getInstance()->getGraphWidth(),
                            Settings::getInstance()->getGraphHeight()+40,
                            g_szClassName2, "Graph", "bg.bmp", WndProcSec);
+
     if(!WinAPI::MakeWindow(wc2, hwnd2, Msg, hInstance, wi_2))
     {
         return 0;
@@ -469,6 +371,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     // Start timers
     SetTimer(hwnd, KPS_TIMER, Settings::getInstance()->getCalcUpdateRate(), NULL);
     SetTimer(hwnd2, GRAPH_TIMER, Settings::getInstance()->getGraphUpdateRate(), NULL);
+
+    //web.Update();
 
     //  Message Loop
     while(GetMessage(&Msg, NULL, 0, 0) > 0)

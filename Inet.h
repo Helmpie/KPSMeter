@@ -22,6 +22,7 @@ class iNet
         bool openHttpGETRequest(LPCSTR url);
         bool openHttpPOSTRequest(LPCSTR url);
         bool sendHttpRequest();
+        bool addHttpRequestHeader(LPCSTR header);
         bool queryHttpRequest();
         bool closeHttpRequest();
 

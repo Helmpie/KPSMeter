@@ -11,7 +11,8 @@
 #define COMM_PREC 3
 #define COMM_TOT 4
 #define COMM_CSV 5
-#define COMM_DEC 6
+#define COMM_SHR 6
+#define COMM_DEC 7
 
 // Text drawing constants
 extern const COLORREF colorWhite;

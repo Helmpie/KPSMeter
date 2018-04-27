@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <utility>
 
 Settings* Settings::instance = 0;
 
@@ -32,28 +33,19 @@ void Settings::ReadSettings()
     std::ifstream file_ini("config.txt");
     if(file_ini.is_open())
     {
-        int i=0;
-        int settings[9];
         while(getline(file_ini,line))
         {
             if(line[0]!='/')
             {
-                size_t pos = line.find("= ")+2;
-                settings[i] = std::atoi(line.substr(pos).c_str());
-                i++;
+                size_t pos = line.find(" = ");
+
+                std::pair<std::string, short> val;
+                val.first = line.substr(0, pos);
+                val.second = std::atoi(line.substr(pos+2).c_str());
+
+                SetReadValue(val);
             }
         }
-
-        graph_update_rate = settings[0];
-        graph_precision = settings[1];
-        graph_width = settings[2];
-        graph_height = settings[3];
-        graph_top = settings[4];
-        b_generate_csv = settings[5];
-        csv_update_rate = settings[6];
-        calc_queue_size = settings[7];
-        calc_update_rate = settings[8];
-
     }
     else
     {
@@ -61,6 +53,32 @@ void Settings::ReadSettings()
     }
 
     file_ini.close();
+}
+
+void Settings::SetReadValue(std::pair<std::string, short> val)
+{
+    if (val.first == "graph_update_rate")
+        graph_update_rate = val.second;
+    else if (val.first == "graph_precision")
+        graph_precision = val.second;
+    else if (val.first ==  "graph_width")
+        graph_width = val.second;
+    else if (val.first ==  "graph_height")
+        graph_height = val.second;
+    else if (val.first ==  "graph_top")
+        graph_top = val.second;
+    else if (val.first ==  "generate_csv")
+        b_generate_csv = val.second;
+    else if (val.first ==  "csv_update_rate")
+        csv_update_rate = val.second;
+    else if (val.first ==  "calc_queue_size")
+        calc_queue_size = val.second;
+    else if (val.first ==  "calc_update_rate")
+        calc_update_rate = val.second;
+    else if (val.first == "user")
+        user = val.second;
+    else
+        std::cout << "Parse error!";
 }
 
 void Settings::ToggleKPSAlwaysOnTop()
@@ -172,6 +190,16 @@ short Settings::getCSVUpdateRate()
     return csv_update_rate;
 }
 
+void Settings::ToggleShareData()
+{
+    b_share_data = !b_share_data;
+}
+
+bool Settings::ShareDataOn()
+{
+    return b_share_data;
+}
+
 short Settings::getCalcQueueSize()
 {
     return calc_queue_size;
@@ -205,4 +233,9 @@ short Settings::getGraphTop()
 short Settings::getGraphUpdateRate()
 {
     return graph_update_rate;
+}
+
+std::string Settings::getUser()
+{
+    return user;
 }

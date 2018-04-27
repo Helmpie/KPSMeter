@@ -59,7 +59,7 @@ bool iNet::openHttpPOSTRequest(LPCSTR obj)
 
     if ( !OpenHttp )
     {
-        Error(httpSession, "Failed to open HTTP request of ", obj);
+        Error(httpSession, "Failed to open HTTP request of ", std::string(obj));
         return false;
     }
     return true;
@@ -71,6 +71,16 @@ bool iNet::sendHttpRequest()
     if ( !HttpSendRequest(OpenHttp, NULL, 0, NULL, 0) )
     {
         Error(OpenHttp, "Failed to send HTTP request");
+        return false;
+    }
+    return true;
+}
+
+bool iNet::addHttpRequestHeader(LPCTSTR header)
+{
+    if ( !HttpAddRequestHeaders(OpenHttp, header, -1L, 0) )
+    {
+        Error(OpenHttp, "Failed to add HTTP request header");
         return false;
     }
     return true;

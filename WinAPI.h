@@ -33,6 +33,9 @@ namespace WinAPI
                     MSG& Msg,
                     HINSTANCE& hInstance,
                     windowInformation& wi);
+
+    void CreateRightClickMenuKPS(HWND &hwnd);
+    void CreateRightClickMenuGraph(HWND &hwnd);
 }
 
 #endif // WINAPI_H_INCLUDED

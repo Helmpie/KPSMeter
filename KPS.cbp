@@ -17,6 +17,7 @@
 				<Linker>
 					<Add library="winmm" />
 					<Add library="gdi32" />
+					<Add library="wininet" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -31,6 +32,7 @@
 					<Add option="-s" />
 					<Add library="winmm" />
 					<Add library="gdi32" />
+					<Add library="wininet" />
 				</Linker>
 			</Target>
 		</Build>
@@ -42,16 +44,26 @@
 		<Linker>
 			<Add library="Gdiplus" />
 		</Linker>
+		<Unit filename="Constants.cpp" />
+		<Unit filename="Constants.h" />
 		<Unit filename="DrawFunctions.cpp" />
 		<Unit filename="DrawFunctions.h" />
 		<Unit filename="Export.cpp" />
 		<Unit filename="Export.h" />
 		<Unit filename="Graph.cpp" />
 		<Unit filename="Graph.h" />
+		<Unit filename="Inet.cpp" />
+		<Unit filename="Inet.h" />
+		<Unit filename="InetError.cpp" />
+		<Unit filename="InetError.h" />
 		<Unit filename="InputHandler.cpp" />
 		<Unit filename="InputHandler.h" />
 		<Unit filename="Settings.cpp" />
 		<Unit filename="Settings.h" />
+		<Unit filename="Web.cpp" />
+		<Unit filename="Web.h" />
+		<Unit filename="WinAPI.cpp" />
+		<Unit filename="WinAPI.h" />
 		<Unit filename="WindowInterface.cpp" />
 		<Unit filename="WindowInterface.h" />
 		<Unit filename="main.cpp" />

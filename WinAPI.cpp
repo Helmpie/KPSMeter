@@ -2,7 +2,8 @@
 
 #include <Tchar.h>
 
-#include "InputHandler.h"
+#include "Constants.h"
+#include "Settings.h"
 
 bool WinAPI::MakeWindow(WNDCLASSEX& wc,
                         HWND& hwnd,
@@ -19,7 +20,7 @@ bool WinAPI::MakeWindow(WNDCLASSEX& wc,
     wc.hInstance     = hInstance;
     wc.hIcon         = LoadIcon(NULL, IDI_APPLICATION);
     wc.hCursor       = LoadCursor(NULL, IDC_ARROW);
-    if(wi.bg == "")
+    if(wi.bg == NULL)
     {
         wc.hbrBackground = CreateSolidBrush(RGB(0, 0, 0));
     }
@@ -60,4 +61,125 @@ bool WinAPI::MakeWindow(WNDCLASSEX& wc,
     }
 
     return 1;
+}
+
+void WinAPI::CreateRightClickMenuKPS(HWND &hwnd)
+{
+    // Determine cursor position
+    POINT p;
+    GetCursorPos(&p);
+
+    // Create dropdown list
+    HMENU hMenu = CreatePopupMenu();
+
+    // Add buttons
+    if ( Settings::getInstance()->KPSWindowIsAOT() )
+    {
+        ::AppendMenu(hMenu,MF_CHECKED,COMM_AOT,_T("Always on top"));
+    }
+    else
+    {
+        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_AOT,_T("Always on top"));
+    }
+
+    /*if ( Settings::getInstance()->KPSWindowHasBorders() )
+    {
+        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_BORDER,_T("Borderless"));
+    }
+    else
+    {
+        ::AppendMenu(hMenu,MF_CHECKED,COMM_BORDER,_T("Borderless"));
+    }*/
+
+    if ( Settings::getInstance()->PrecisionModeOn() )
+    {
+        ::AppendMenu(hMenu,MF_CHECKED,COMM_PREC,_T("Precision Mode"));
+    }
+    else
+    {
+        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_PREC,_T("Precision Mode"));
+    }
+
+    if ( Settings::getInstance()->TotalKeysOn() )
+    {
+        ::AppendMenu(hMenu,MF_CHECKED,COMM_TOT,_T("Show Total Keys"));
+    }
+    else
+    {
+        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_TOT,_T("Show Total Keys"));
+    }
+
+    if ( Settings::getInstance()->getGenerateCSV() )
+    {
+        ::AppendMenu(hMenu,MF_CHECKED,COMM_CSV,_T("Generate CSV file"));
+    }
+    else
+    {
+        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_CSV,_T("Generate CSV file"));
+    }
+
+    if ( Settings::getInstance()->ShareDataOn() )
+    {
+        ::AppendMenu(hMenu,MF_CHECKED,COMM_SHR,_T("Share data"));
+    }
+    else
+    {
+        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_SHR,_T("Share data"));
+    }
+
+    if ( Settings::getInstance()->DecimalPointOn() )
+    {
+        ::AppendMenu(hMenu,MF_CHECKED,COMM_DEC,_T("Show decimal point"));
+    }
+    else
+    {
+        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_DEC,_T("Show decimal point"));
+    }
+
+    // Show menu at mouse position
+    TrackPopupMenu( hMenu,
+                    TPM_RIGHTBUTTON,
+                    p.x,
+                    p.y,
+                    0,
+                    hwnd,
+                    NULL);
+}
+
+void WinAPI::CreateRightClickMenuGraph(HWND &hwnd)
+{
+    // Determine cursor position
+    POINT p;
+    GetCursorPos(&p);
+
+    // Create dropdown list
+    HMENU hMenu = CreatePopupMenu();
+
+    // Add buttons
+    if ( Settings::getInstance()->GraphWindowIsAOT() )
+    {
+        ::AppendMenu(hMenu,MF_CHECKED,COMM_AOT,_T("Always on top"));
+    }
+    else
+    {
+        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_AOT,_T("Always on top"));
+    }
+
+    /*if ( Settings::getInstance()->GraphWindowHasBorders() )
+    {
+        ::AppendMenu(hMenu,MF_UNCHECKED,COMM_BORDER,_T("Borderless"));
+    }
+    else
+    {
+        ::AppendMenu(hMenu,MF_CHECKED,COMM_BORDER,_T("Borderless"));
+    }*/
+
+    // Show menu at mouse position
+    TrackPopupMenu( hMenu,
+                    TPM_RIGHTBUTTON,
+                    p.x,
+                    p.y,
+                    0,
+                    hwnd,
+                    NULL);
 }

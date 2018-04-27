@@ -2,6 +2,8 @@
 #define SETTINGS_H_INCLUDED
 
 #include "WindowInterface.h"
+#include <utility>
+#include <string>
 
 class Settings : public WindowInterface
 {
@@ -23,21 +25,27 @@ class Settings : public WindowInterface
         bool b_graph_window_has_borders = true;
 
         // Calculation settings
-        short calc_queue_size;// = 14;
-        short calc_update_rate;// = 100;
+        short calc_queue_size = 20;
+        short calc_update_rate = 50;
 
         // CSV settings
         bool b_generate_csv = false;
-        short csv_update_rate;
+        short csv_update_rate = 5000;
+
+        // Sharing settings
+        bool b_share_data = false;
 
         // Graph settings
-        short graph_update_rate;// = 350; // in milliseconds
-        short graph_precision;// = 150;
-        short graph_width;// = 400;
-        short graph_height;// = 225;
-        short graph_top;// = 65;
+        short graph_update_rate = 350; // in milliseconds
+        short graph_precision = 150;
+        short graph_width = 400;
+        short graph_height = 225;
+        short graph_top = 65;
+
+        std::string user = "guest";
 
         void ReadSettings();
+        void SetReadValue(std::pair<std::string, short> val);
 
     public:
         static Settings* getInstance();
@@ -72,6 +80,9 @@ class Settings : public WindowInterface
 
         short getCSVUpdateRate();
 
+        void ToggleShareData();
+        bool ShareDataOn();
+
         short getCalcQueueSize();
         short getCalcUpdateRate();
 
@@ -80,6 +91,8 @@ class Settings : public WindowInterface
         short getGraphHeight();
         short getGraphTop();
         short getGraphUpdateRate();
+
+        std::string getUser();
 };
 
 #endif // SETTINGS_H_INCLUDED

@@ -1,10 +1,13 @@
 #include "Export.h"
-#include "Settings.h"
+
 #include <string>
 #include <iostream>
 #include <ctime>
 #include <chrono>
 #include <algorithm>
+
+#include "Settings.h"
+#include "Lib.h"
 
 Export::Export()
 {
@@ -18,9 +21,10 @@ Export::~Export()
 
 void Export::openCSV()
 {
-    std::time_t time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    std::string datetime(std::ctime(&time));
-    std::string filename = datetime.erase(datetime.find('\n', 0), 1) + ".csv";
+    std::string filename;
+    Lib::SysTime(filename);
+
+    filename += ".csv";
     filename.erase(std::remove(filename.begin(), filename.end(), ':'), filename.end());
 
     file.open(filename);
@@ -45,13 +49,13 @@ void Export::WriteToCSV()
     {
         short average = total/((Settings::getInstance()->getCSVUpdateRate()/1000)*(1000/Settings::getInstance()->getCalcUpdateRate()));
 
-        std::time_t time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        std::string datetime(std::ctime(&time));
+        std::string datetime;
+        Lib::SysTime(datetime);
 
         file << average;
         file << ",";
         file << datetime;
-        //file << "\n";
+        file << "\n";
 
         total = 0;
     }

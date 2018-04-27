@@ -1,15 +1,117 @@
 #include "Web.h"
+
+#include <sstream>
+#include <string>
+
 #include "Inet.h"
+#include "Lib.h"
+#include "Settings.h"
 
 Web::Web()
 {
-    /*
-    internet.openHttpSession("httpbin.org");
+    /* Test code...
+
+    if ( internet.openHttpSession("ptsv2.com") )
+    {
+        connected = true;
+    }
+
+    //internet.openHttpSession("httpbin.org");
+
     //internet.openHttpGETRequest("get");
     //internet.openHttpPOSTRequest("post");
-    internet.openHttpPOSTRequest("post");
-    internet.sendHttpRequest();
+    //internet.openHttpPOSTRequest("/t/nqfe4-1524857838/post");
 
+    //internet.addHttpRequestHeader("\"data\":\"test\"");
+
+    //internet.sendHttpRequest();
+
+    */
+}
+
+Web::~Web()
+{
+    Close();
+}
+
+bool Web::OpenConnect()
+{
+    if ( internet.openHttpSession("ptsv2.com") )
+    {
+        connected = true;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool Web::OpenConnect(const std::string& host)
+{
+    if ( internet.openHttpSession(host.c_str()) )
+    {
+        connected = true;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void Web::Close()
+{
+    connected = false;
+
+    internet.closeHttpRequest();
+    internet.closeHttpSession();
+    internet.closeConnection();
+}
+
+bool Web::Update(const std::string& data)
+{
+    if(connected)
+    {
+        std::string datetime;
+        Lib::SysTime(datetime);
+
+        std::stringstream JSON;
+        JSON << "{"
+             << "\"user\":\""
+             << Settings::getInstance()->getUser()
+             << "\",\"data\":\""
+             << data
+             << "\",\"time\":\""
+             << datetime
+             << "\"}";
+
+        std::string header = "\"data\":\"" + JSON.str() + "\"";
+        //std::cout << JSON.str();
+        //std::cout << header;
+
+        if ( !( internet.openHttpPOSTRequest("/t/nqfe4-1524857838/post") &&
+                internet.addHttpRequestHeader(header.c_str()) &&
+                internet.sendHttpRequest() ) )
+        {
+            Failure();
+            return false;
+        }
+
+        //ReadResponse();
+
+        internet.closeHttpRequest();
+    }
+    else
+    {
+        std::cout << "No active connection..." << std::endl;
+    }
+
+    return true;
+}
+
+void Web::ReadResponse()
+{
     HINTERNET openHttp = internet.getOpenHttp();
 
     BYTE DataReceived;
@@ -19,13 +121,12 @@ Web::Web()
     {
         std::cout << DataReceived;
     }
-
-    internet.closeHttpRequest();
-    internet.closeHttpSession();
-    */
 }
 
-Web::~Web()
+void Web::Failure()
 {
+    std::cout << "Failure during Http request, disconnecting..." << std::endl;
 
+    Settings::getInstance()->ToggleShareData();
+    Close();
 }

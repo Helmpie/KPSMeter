@@ -5,6 +5,7 @@
 
 namespace Lib
 {
+    void SysDateTime(std::string &str);
     void SysTime(std::string &str);
 }
 

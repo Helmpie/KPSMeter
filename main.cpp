@@ -8,16 +8,18 @@
 #include "Constants.h"
 #include "WinAPI.h"
 #include "Settings.h"
+#include "Lib.h"
 #include "InputHandler.h"
 #include "DrawFunctions.h"
 #include "Graph.h"
 #include "Export.h"
 #include "Web.h"
+#include "IO.h"
 
 static InputHandler input;
 static Graph graph;
 static Export csv;
-static Web web;
+//static Web web;
 
 // Timers
 const int KPS_TIMER = 1;
@@ -153,13 +155,29 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     break;
 
                 case COMM_SHR:
+                    // Kill any existing thread
+                    IO::KillThread();
+
                     if(!Settings::getInstance()->ShareDataOn())
                     {
-                        web.OpenConnect();
+
+                        IO::StartThread(&input);
+                        //web.OpenConnect();
+                        //go = true;
+                        //web_io = std::thread([]{
+                        //                     while(go) {
+                        //                     std::cout << "thread ";
+                        //                     Sleep(1000); }
+                        //                     });
+                        //Sleep(100000);
+
                     }
                     else
                     {
-                        web.Close();
+                        //IO::KillThread();
+                        //go = false;
+                        //web_io.join();
+                        //web.Close();
                     }
                     Settings::getInstance()->ToggleShareData();
                     break;
@@ -201,6 +219,10 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         case WM_CLOSE:
             // Stop calculation timer when exiting
             KillTimer(hwnd,KPS_TIMER);
+
+            // Kill share thread
+            IO::KillThread();
+
             DestroyWindow(hwnd);
             break;
         case WM_DESTROY:
@@ -293,6 +315,10 @@ LRESULT CALLBACK WndProcSec(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         case WM_CLOSE:
             // Stop graph timer when exiting
             KillTimer(hwnd,GRAPH_TIMER);
+
+            // Kill share thread
+            IO::KillThread();
+
             DestroyWindow(hwnd);
             break;
         case WM_DESTROY:

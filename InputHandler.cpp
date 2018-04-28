@@ -10,6 +10,7 @@ InputHandler::InputHandler()
 {
     deque_size = Settings::getInstance()->getCalcQueueSize();
     deque_div = (float)deque_size / (1000/(float)Settings::getInstance()->getCalcUpdateRate());
+    appr_div = (float)(1000-Settings::getInstance()->getCalcUpdateRate()) / 1000;
 
     // init key_que
     for (int i=0;i<deque_size;i++) { key_que.push_back(0); }
@@ -39,7 +40,7 @@ void InputHandler::ResetMaxKps()
 
 void InputHandler::calculate_kps_apr()
 {
-    kps = kps*0.90;
+    kps = kps*appr_div;
     kps += keycount;
     keycount = 0;
 

@@ -27,7 +27,7 @@ class InputHandler
         // Reset max_kps to 0
         void ResetMaxKps();
 
-        // Calculate kps approximately using kps = previous_kps * 0.9
+        // Calculate kps approximately using kps = previous_kps * 1-(rate^-1)
         void calculate_kps_apr();
 
         // Calculate precise kps using deque
@@ -50,8 +50,10 @@ class InputHandler
         int16_t keycount = 0; // number of key-presses registered by keydown();
         std::deque<unsigned char> key_que; // storage for Precision Mode;
 
+        // Calculation assists
         short deque_size;
         float deque_div;
+        float appr_div;
 };
 
 #endif // INPUTHANDLER_H_INCLUDED

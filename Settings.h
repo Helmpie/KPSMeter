@@ -34,6 +34,7 @@ class Settings : public WindowInterface
 
         // Sharing settings
         bool b_share_data = false;
+        short share_update_rate = 1000;
 
         // Graph settings
         short graph_update_rate = 350; // in milliseconds
@@ -82,6 +83,8 @@ class Settings : public WindowInterface
 
         void ToggleShareData();
         bool ShareDataOn();
+
+        short getShareUpdateRate();
 
         short getCalcQueueSize();
         short getCalcUpdateRate();

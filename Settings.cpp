@@ -75,6 +75,8 @@ void Settings::SetReadValue(std::pair<std::string, short> val)
         calc_queue_size = val.second;
     else if (val.first ==  "calc_update_rate")
         calc_update_rate = val.second;
+    else if (val.first == "share_update_rate")
+        share_update_rate = val.second;
     else if (val.first == "user")
         user = val.second;
     else
@@ -198,6 +200,11 @@ void Settings::ToggleShareData()
 bool Settings::ShareDataOn()
 {
     return b_share_data;
+}
+
+short Settings::getShareUpdateRate()
+{
+    return share_update_rate;
 }
 
 short Settings::getCalcQueueSize()

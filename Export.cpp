@@ -11,7 +11,7 @@
 
 Export::Export()
 {
-
+    div = Settings::getInstance()->getCSVUpdateRate() / Settings::getInstance()->getCalcUpdateRate();
 }
 
 Export::~Export()
@@ -47,7 +47,7 @@ void Export::WriteToCSV()
 {
     if(file.is_open())
     {
-        short average = total/((Settings::getInstance()->getCSVUpdateRate()/1000)*(1000/Settings::getInstance()->getCalcUpdateRate()));
+        short average = total/div;
 
         std::string time;
         Lib::SysTime(time);
@@ -60,4 +60,3 @@ void Export::WriteToCSV()
         total = 0;
     }
 }
-

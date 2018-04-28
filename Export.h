@@ -17,7 +17,8 @@ class Export
         void WriteToCSV();
 
     private:
-        short total = 0;
+        float total = 0;
+        float div = 1;
         std::ofstream file;
 };
 

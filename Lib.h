@@ -7,6 +7,8 @@ namespace Lib
 {
     void SysDateTime(std::string &str);
     void SysTime(std::string &str);
+    void SysTimeStamp(std::string &str);
+    void PrintTimeStamp();
 }
 
 #endif // LIB_H_INCLUDED

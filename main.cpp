@@ -253,7 +253,6 @@ LRESULT CALLBACK WndProcSec(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             //        break;
 
             //}
-
             break;
         case WM_PAINT:
             {
@@ -401,7 +400,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     SetTimer(hwnd, KPS_TIMER, Settings::getInstance()->getCalcUpdateRate(), NULL);
     SetTimer(hwnd2, GRAPH_TIMER, Settings::getInstance()->getGraphUpdateRate(), NULL);
 
-    //web.Update();
+    std::cout << _WIN32_WINNT;
 
     //  Message Loop
     while(GetMessage(&Msg, NULL, 0, 0) > 0)

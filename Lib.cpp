@@ -1,6 +1,7 @@
 #include "Lib.h"
 
 #include <chrono>
+#include <sys/time.h>
 #include <sstream>
 #include <iostream>
 
@@ -20,7 +21,27 @@ void Lib::SysTime(std::string &str)
     time (&rawtime);
     timeinfo = localtime (&rawtime);
 
-    strftime (buffer,80,"%H-%M-%S",timeinfo);
+    strftime (buffer,80,"%H:%M:%S",timeinfo);
 
     str = buffer;
+}
+
+void Lib::SysTimeStamp(std::string& str)
+{
+    timeval curTime;
+    gettimeofday(&curTime, NULL);
+    int milli = curTime.tv_usec / 1000;
+
+    char buffer[4] = "";
+    sprintf(buffer, ".%d", milli);
+
+    Lib::SysTime(str);
+    str += buffer;
+}
+
+void Lib::PrintTimeStamp()
+{
+    std::string str;
+    Lib::SysTimeStamp(str);
+    std::cout << str << std::endl;
 }

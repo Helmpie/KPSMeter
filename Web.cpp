@@ -85,10 +85,6 @@ bool Web::Update(const std::string& data)
              << data
              << "\"}";
 
-
-        std::cout << JSON.str() << " ";
-
-        //std::string header = "\"data\":\"" + JSON.str() + "\"";
         if ( !( internet.openHttpPOSTRequest("/newdata.php") &&
                 internet.sendHttpPOSTRequest(JSON.str()) ) )
         {

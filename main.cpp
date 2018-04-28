@@ -54,6 +54,11 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                         csv.UpdateAverage(input.getKps());
                     }
 
+                    if(Settings::getInstance()->ShareDataOn())
+                    {
+                        IO::AddKps(input.getKps());
+                    }
+
                     InvalidateRect(hwnd,NULL,FALSE);
                     break;
                 case CSV_TIMER:
@@ -220,12 +225,11 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             // Stop calculation timer when exiting
             KillTimer(hwnd,KPS_TIMER);
 
-            // Kill share thread
-            IO::KillThread();
-
             DestroyWindow(hwnd);
             break;
         case WM_DESTROY:
+            // Kill share thread
+            IO::KillThread();
             PostQuitMessage(0);
             break;
         default:
@@ -316,12 +320,11 @@ LRESULT CALLBACK WndProcSec(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             // Stop graph timer when exiting
             KillTimer(hwnd,GRAPH_TIMER);
 
-            // Kill share thread
-            IO::KillThread();
-
             DestroyWindow(hwnd);
             break;
         case WM_DESTROY:
+            // Kill share thread
+            IO::KillThread();
             PostQuitMessage(0);
             break;
         default:

@@ -76,6 +76,19 @@ bool iNet::sendHttpRequest()
     return true;
 }
 
+bool iNet::sendHttpPOSTRequest(const std::string& POST)
+{
+    char post_cstr[POST.length()];
+    strcpy(post_cstr, POST.c_str());
+
+    if ( !HttpSendRequest(OpenHttp, NULL, 0, post_cstr, sizeof(char)*POST.length() ) )
+    {
+        Error(OpenHttp, "Failed to send HTTP request");
+        return false;
+    }
+    return true;
+}
+
 bool iNet::addHttpRequestHeader(LPCTSTR header)
 {
     if ( !HttpAddRequestHeaders(OpenHttp, header, -1L, 0) )

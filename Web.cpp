@@ -37,7 +37,7 @@ Web::~Web()
 
 bool Web::OpenConnect()
 {
-    if ( internet.openHttpSession("ptsv2.com") )
+    if ( internet.openHttpSession("kpsmeter.hylcos.nl") )
     {
         connected = true;
         return true;
@@ -83,17 +83,14 @@ bool Web::Update(const std::string& data)
              << Settings::getInstance()->getUser()
              << "\",\"data\":\""
              << data
-             << "\",\"time\":\""
-             << time
              << "\"}";
 
-        std::string header = "\"data\":\"" + JSON.str() + "\"";
-        //std::cout << JSON.str();
-        //std::cout << header;
 
-        if ( !( internet.openHttpPOSTRequest("/t/6c24e-1524919823/post") &&
-                internet.addHttpRequestHeader(header.c_str()) &&
-                internet.sendHttpRequest() ) )
+        std::cout << JSON.str() << " ";
+
+        //std::string header = "\"data\":\"" + JSON.str() + "\"";
+        if ( !( internet.openHttpPOSTRequest("/newdata.php") &&
+                internet.sendHttpPOSTRequest(JSON.str()) ) )
         {
             Failure();
             return false;

@@ -8,4 +8,4 @@ generate_csv = 0
 csv_update_rate = 5000
 calc_queue_size = 20
 calc_update_rate = 50
-share_update_rate = 5000
+share_update_rate = 3000

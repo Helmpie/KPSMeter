@@ -1,9 +1,11 @@
 #include "WinAPI.h"
 
 #include <Tchar.h>
+#include <iostream>
 
 #include "Constants.h"
 #include "Settings.h"
+#include "Lib.h"
 
 bool WinAPI::MakeWindow(WNDCLASSEX& wc,
                         HWND& hwnd,
@@ -182,4 +184,31 @@ void WinAPI::CreateRightClickMenuGraph(HWND &hwnd)
                     0,
                     hwnd,
                     NULL);
+}
+
+// Win32 timers are unreliable at smaller intervals
+// Calculate the actual interval and adjust in Settings
+bool WinAPI::InitUpdateRate(bool &init)
+{
+    static short icount = 1;
+    static short one = 1001;
+    static short two = 1001;
+
+    // Only recalculate after first 10 ticks
+    if(icount<10 && ++icount) return true;
+
+    if(one>1000)
+        one = Lib::SysMilliSeconds();
+    else if (two>1000)
+        two = Lib::SysMilliSeconds();
+    else
+    {
+        // New rate equals diff between two ticks
+        short rate;
+        rate = (two>one) ? two-one : one - two;
+        Settings::getInstance()->setCalcUpdateRate(rate);
+        init = false;
+    }
+
+    return true;
 }

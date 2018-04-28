@@ -18,7 +18,6 @@ class Export
 
     private:
         float total = 0;
-        float div = 1;
         std::ofstream file;
 };
 

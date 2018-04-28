@@ -36,6 +36,8 @@ namespace WinAPI
 
     void CreateRightClickMenuKPS(HWND &hwnd);
     void CreateRightClickMenuGraph(HWND &hwnd);
+
+    bool InitUpdateRate(bool &init);
 }
 
 #endif // WINAPI_H_INCLUDED

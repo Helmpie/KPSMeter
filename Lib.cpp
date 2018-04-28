@@ -39,6 +39,13 @@ void Lib::SysTimeStamp(std::string& str)
     str += buffer;
 }
 
+int Lib::SysMilliSeconds()
+{
+    timeval curTime;
+    gettimeofday(&curTime, NULL);
+    return curTime.tv_usec / 1000;
+}
+
 void Lib::PrintTimeStamp()
 {
     std::string str;

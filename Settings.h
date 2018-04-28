@@ -27,6 +27,7 @@ class Settings : public WindowInterface
         // Calculation settings
         short calc_queue_size = 20;
         short calc_update_rate = 50;
+        short calc_win_update_rate  = 50;
 
         // CSV settings
         bool b_generate_csv = false;
@@ -86,8 +87,10 @@ class Settings : public WindowInterface
 
         short getShareUpdateRate();
 
+        void setCalcUpdateRate(short rate);
         short getCalcQueueSize();
         short getCalcUpdateRate();
+        short getCalcWinUpdateRate();
 
         short getGraphPrecision();
         short getGraphWidth();

@@ -25,6 +25,7 @@ static Export csv;
 const int KPS_TIMER = 1;
 const int GRAPH_TIMER = 2;
 const int CSV_TIMER = 3;
+const int CALC_TIMER = 4;
 
 // Graph background
 static HBITMAP graph_bg = (HBITMAP) LoadImage(0,_T("bg.bmp"),
@@ -40,25 +41,6 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             switch (wParam)
             {
                 case KPS_TIMER:
-                    if (Settings::getInstance()->PrecisionModeOn())
-                    {
-                        input.calculate_kps_prec();
-                    }
-                    else
-                    {
-                        input.calculate_kps_apr();
-                    }
-
-                    if(Settings::getInstance()->getGenerateCSV())
-                    {
-                        csv.UpdateAverage(input.getKps());
-                    }
-
-                    if(Settings::getInstance()->ShareDataOn())
-                    {
-                        IO::AddKps(input.getKps());
-                    }
-
                     InvalidateRect(hwnd,NULL,FALSE);
                     break;
                 case CSV_TIMER:
@@ -167,22 +149,6 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     {
 
                         IO::StartThread(&input);
-                        //web.OpenConnect();
-                        //go = true;
-                        //web_io = std::thread([]{
-                        //                     while(go) {
-                        //                     std::cout << "thread ";
-                        //                     Sleep(1000); }
-                        //                     });
-                        //Sleep(100000);
-
-                    }
-                    else
-                    {
-                        //IO::KillThread();
-                        //go = false;
-                        //web_io.join();
-                        //web.Close();
                     }
                     Settings::getInstance()->ToggleShareData();
                     break;
@@ -244,15 +210,9 @@ LRESULT CALLBACK WndProcSec(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     switch(msg)
     {
         case WM_TIMER:
-            //switch (wParam)
-            //{
-            //    case GRAPH_TIMER:
-                    graph.addDot(input.getKps());
+            graph.addDot(input.getKps());
+            InvalidateRect(hwnd, NULL, TRUE);
 
-                    InvalidateRect(hwnd, NULL, TRUE);
-            //        break;
-
-            //}
             break;
         case WM_PAINT:
             {
@@ -332,6 +292,32 @@ LRESULT CALLBACK WndProcSec(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     return 0;
 }
 
+VOID CALLBACK CalcTimerCallback(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
+{
+    // Adjust tick rate
+    static bool init = true;
+    if (init && WinAPI::InitUpdateRate(init)) {}
+
+    if (Settings::getInstance()->PrecisionModeOn())
+    {
+        input.calculate_kps_prec();
+    }
+    else
+    {
+        input.calculate_kps_apr();
+    }
+
+    if(Settings::getInstance()->getGenerateCSV())
+    {
+        csv.UpdateAverage(input.getKps());
+    }
+
+    if(Settings::getInstance()->ShareDataOn())
+    {
+        IO::AddKps(input.getKps());
+    }
+}
+
 // Callback function for keyboard hook
 LRESULT CALLBACK MyKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
@@ -397,10 +383,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     Gdiplus::GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
     // Start timers
-    SetTimer(hwnd, KPS_TIMER, Settings::getInstance()->getCalcUpdateRate(), NULL);
+    SetTimer(hwnd, KPS_TIMER, Settings::getInstance()->getCalcWinUpdateRate(), NULL);
     SetTimer(hwnd2, GRAPH_TIMER, Settings::getInstance()->getGraphUpdateRate(), NULL);
-
-    std::cout << _WIN32_WINNT;
+    SetTimer(hwnd, CALC_TIMER, Settings::getInstance()->getCalcUpdateRate(), CalcTimerCallback);
 
     //  Message Loop
     while(GetMessage(&Msg, NULL, 0, 0) > 0)

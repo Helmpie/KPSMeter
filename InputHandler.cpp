@@ -9,11 +9,10 @@
 InputHandler::InputHandler()
 {
     deque_size = Settings::getInstance()->getCalcQueueSize();
-    deque_div = (float)deque_size / (1000/(float)Settings::getInstance()->getCalcUpdateRate());
-    appr_div = (float)(1000-Settings::getInstance()->getCalcUpdateRate()) / 1000;
 
     // init key_que
-    for (int i=0;i<deque_size;i++) { key_que.push_back(0); }
+    for (int i=0;i<deque_size;i++)
+        key_que.push_back(0);
 }
 
 InputHandler::~InputHandler()
@@ -40,7 +39,7 @@ void InputHandler::ResetMaxKps()
 
 void InputHandler::calculate_kps_apr()
 {
-    kps = kps*appr_div;
+    kps = kps * ( (float)(1000-Settings::getInstance()->getCalcUpdateRate()) / 1000 );
     kps += keycount;
     keycount = 0;
 
@@ -58,7 +57,7 @@ void InputHandler::calculate_kps_prec()
         kps += key_que[i];
     }
 
-    kps = kps/deque_div;
+    kps = kps / ( (float)deque_size / ( 1000/ (float)Settings::getInstance()->getCalcUpdateRate() ) );
 
     keycount = 0;
 

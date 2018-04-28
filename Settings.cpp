@@ -73,8 +73,10 @@ void Settings::SetReadValue(std::pair<std::string, short> val)
         csv_update_rate = val.second;
     else if (val.first ==  "calc_queue_size")
         calc_queue_size = val.second;
-    else if (val.first ==  "calc_update_rate")
+    else if (val.first == "calc_update_rate")
         calc_update_rate = val.second;
+    else if (val.first ==  "calc_win_update_rate")
+        calc_win_update_rate  = val.second;
     else if (val.first == "share_update_rate")
         share_update_rate = val.second;
     else if (val.first == "user")
@@ -86,18 +88,6 @@ void Settings::SetReadValue(std::pair<std::string, short> val)
 void Settings::ToggleKPSAlwaysOnTop()
 {
     b_kps_always_on_top = !b_kps_always_on_top;
-    /*
-    if (!b_kps_always_on_top)
-    {
-        toggle_window_on_top(true);
-        b_kps_always_on_top = true;
-    }
-    else
-    {
-        toggle_window_on_top(false);
-        b_kps_always_on_top = false;
-    }
-    */
 }
 
 bool Settings::KPSWindowIsAOT()
@@ -108,18 +98,6 @@ bool Settings::KPSWindowIsAOT()
 void Settings::ToggleKPSWindowBorders()
 {
     b_kps_window_has_borders = !b_kps_window_has_borders;
-    /*
-    if (!b_kps_window_has_borders)
-    {
-        toggle_window_borders(true);
-        b_kps_window_has_borders = true;
-    }
-    else
-    {
-        toggle_window_borders(false);
-        b_kps_window_has_borders = false;
-    }
-    */
 }
 
 bool Settings::KPSWindowHasBorders()
@@ -207,6 +185,11 @@ short Settings::getShareUpdateRate()
     return share_update_rate;
 }
 
+void Settings::setCalcUpdateRate(short rate)
+{
+    calc_update_rate = rate;
+}
+
 short Settings::getCalcQueueSize()
 {
     return calc_queue_size;
@@ -215,6 +198,11 @@ short Settings::getCalcQueueSize()
 short Settings::getCalcUpdateRate()
 {
     return calc_update_rate;
+}
+
+short Settings::getCalcWinUpdateRate()
+{
+    return calc_win_update_rate;
 }
 
 short Settings::getGraphPrecision()

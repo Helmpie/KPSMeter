@@ -15,7 +15,6 @@ static std::thread web_io;
 static InputHandler* input_ptr;
 
 static int total_kps;
-static int web_div = Settings::getInstance()->getShareUpdateRate() / Settings::getInstance()->getCalcUpdateRate();
 
 bool go = true;
 bool active = false;
@@ -27,8 +26,9 @@ static void ShareData()
 
     while(go)
     {
-        //go = web.Update(std::to_string((int)input_ptr->getKps()));
-        go = web.Update( std::to_string( (total_kps / web_div) ) );
+        go = web.Update( std::to_string(
+                ( total_kps / ( Settings::getInstance()->getShareUpdateRate() /
+                                Settings::getInstance()->getCalcUpdateRate() ) ) ) );
         total_kps = 0;
         Sleep(Settings::getInstance()->getShareUpdateRate());
     }

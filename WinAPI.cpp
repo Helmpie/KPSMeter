@@ -110,7 +110,7 @@ void WinAPI::CreateRightClickMenuKPS(HWND &hwnd)
     {
         ::AppendMenu(hMenu,MF_UNCHECKED,COMM_TOT,_T("Show Total Keys"));
     }
-
+#ifndef __LITE__
     if ( Settings::getInstance()->getGenerateCSV() )
     {
         ::AppendMenu(hMenu,MF_CHECKED,COMM_CSV,_T("Generate CSV file"));
@@ -128,7 +128,7 @@ void WinAPI::CreateRightClickMenuKPS(HWND &hwnd)
     {
         ::AppendMenu(hMenu,MF_UNCHECKED,COMM_SHR,_T("Share data"));
     }
-
+#endif // __LITE__
     if ( Settings::getInstance()->DecimalPointOn() )
     {
         ::AppendMenu(hMenu,MF_CHECKED,COMM_DEC,_T("Show decimal point"));

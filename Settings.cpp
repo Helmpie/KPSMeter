@@ -56,8 +56,6 @@ void Settings::ReadSettings()
 
 void Settings::SetReadValue(std::pair<std::string, std::string> val)
 {
-    std::cout << val.first << " " << val.second << std::endl;
-
     if (val.first == "graph_update_rate")
         graph_update_rate = std::atoi((val.second).c_str());
     else if (val.first == "graph_precision")

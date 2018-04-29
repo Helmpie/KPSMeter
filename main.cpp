@@ -12,20 +12,24 @@
 #include "InputHandler.h"
 #include "DrawFunctions.h"
 #include "Graph.h"
+
+#ifndef __LITE__
 #include "Export.h"
 #include "Web.h"
 #include "IO.h"
+#endif // __LITE__
 
 static InputHandler input;
 static Graph graph;
+#ifndef __LITE__
 static Export csv;
-//static Web web;
+#endif // __LITE__
 
 // Timers
 const int KPS_TIMER = 1;
 const int GRAPH_TIMER = 2;
-const int CSV_TIMER = 3;
-const int CALC_TIMER = 4;
+const int CALC_TIMER = 3;
+const int CSV_TIMER = 4;
 
 // Graph background
 static HBITMAP graph_bg = (HBITMAP) LoadImage(0,_T("bg.bmp"),
@@ -43,12 +47,14 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                 case KPS_TIMER:
                     InvalidateRect(hwnd,NULL,FALSE);
                     break;
+#ifndef __LITE__
                 case CSV_TIMER:
                     if(Settings::getInstance()->getGenerateCSV())
                     {
                         csv.WriteToCSV();
                     }
                     break;
+#endif
             }
             break;
         case WM_PAINT:
@@ -126,7 +132,7 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     InvalidateRect (hwnd, NULL, true);
                     UpdateWindow (hwnd);
                     break;
-
+#ifndef __LITE__
                 case COMM_CSV:
                     if(!Settings::getInstance()->getGenerateCSV())
                     {
@@ -152,7 +158,7 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
                     }
                     Settings::getInstance()->ToggleShareData();
                     break;
-
+#endif // __LITE__
                 case COMM_DEC:
                     Settings::getInstance()->ToggleDecimalPoint();
                     break;
@@ -194,8 +200,10 @@ LRESULT CALLBACK WndProcPrim(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             DestroyWindow(hwnd);
             break;
         case WM_DESTROY:
+#ifndef __LITE__
             // Kill share thread
             IO::KillThread();
+#endif // __LITE__
             PostQuitMessage(0);
             break;
         default:
@@ -282,8 +290,10 @@ LRESULT CALLBACK WndProcSec(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             DestroyWindow(hwnd);
             break;
         case WM_DESTROY:
+#ifndef __LITE__
             // Kill share thread
             IO::KillThread();
+#endif // __LITE__
             PostQuitMessage(0);
             break;
         default:
@@ -306,7 +316,7 @@ VOID CALLBACK CalcTimerCallback(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dw
     {
         input.calculate_kps_apr();
     }
-
+#ifndef __LITE__
     if(Settings::getInstance()->getGenerateCSV())
     {
         csv.UpdateAverage(input.getKps());
@@ -316,6 +326,7 @@ VOID CALLBACK CalcTimerCallback(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dw
     {
         IO::AddKps(input.getKps());
     }
+#endif // __LITE__
 }
 
 // Callback function for keyboard hook

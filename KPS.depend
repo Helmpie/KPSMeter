@@ -1,0 +1,170 @@
+# depslib dependency file v1.0
+1524838465 source:c:\users\hein\documents\codeblocks projects\kps\drawfunctions.cpp
+	"DrawFunctions.h"
+	<windows.h>
+	<Gdiplus.h>
+	<string>
+	<deque>
+	<iostream>
+	"Constants.h"
+	"Settings.h"
+
+1524426050 c:\users\hein\documents\codeblocks projects\kps\drawfunctions.h
+	<windows.h>
+	<string>
+	<deque>
+	<gdiplus.h>
+
+1525003717 c:\users\hein\documents\codeblocks projects\kps\settings.h
+	"WindowInterface.h"
+	<string>
+
+1524836230 c:\users\hein\documents\codeblocks projects\kps\windowinterface.h
+	<windows.h>
+
+1524437379 source:c:\users\hein\documents\codeblocks projects\kps\graph.cpp
+	"Graph.h"
+	<iostream>
+	"DrawFunctions.h"
+
+1524437917 c:\users\hein\documents\codeblocks projects\kps\graph.h
+	"WindowInterface.h"
+	"InputHandler.h"
+	"Settings.h"
+	<deque>
+
+1525012134 c:\users\hein\documents\codeblocks projects\kps\inputhandler.h
+	<windows.h>
+	<cstdint>
+	<deque>
+	<string>
+	<sstream>
+	"WindowInterface.h"
+	"Settings.h"
+
+1524950530 source:c:\users\hein\documents\codeblocks projects\kps\inputhandler.cpp
+	"InputHandler.h"
+	"Settings.h"
+	<iomanip>
+	<iostream>
+	<cmath>
+
+1525011614 source:c:\users\hein\documents\codeblocks projects\kps\settings.cpp
+	"Settings.h"
+	"WindowInterface.h"
+	<iostream>
+	<fstream>
+	<string>
+
+1524836242 source:c:\users\hein\documents\codeblocks projects\kps\windowinterface.cpp
+	"WindowInterface.h"
+	<string>
+	"Settings.h"
+
+1524950530 source:c:\users\hein\documents\codeblocks projects\kps\export.cpp
+	"Export.h"
+	<string>
+	<iostream>
+	<ctime>
+	<chrono>
+	<algorithm>
+	"Settings.h"
+	"Lib.h"
+
+1524950530 c:\users\hein\documents\codeblocks projects\kps\export.h
+	<string>
+	<fstream>
+
+1525011753 source:c:\users\hein\documents\codeblocks projects\kps\main.cpp
+	<iostream>
+	<windows.h>
+	<stdio.h>
+	<Tchar.h>
+	<gdiplus.h>
+	<string>
+	"Constants.h"
+	"WinAPI.h"
+	"Settings.h"
+	"Lib.h"
+	"InputHandler.h"
+	"DrawFunctions.h"
+	"Graph.h"
+	"Export.h"
+	"Web.h"
+	"IO.h"
+
+1524926931 source:c:\users\hein\documents\codeblocks projects\kps\inet.cpp
+	"Inet.h"
+
+1524926478 c:\users\hein\documents\codeblocks projects\kps\inet.h
+	<iostream>
+	<cstring>
+	<wininet.h>
+	"InetError.h"
+
+1524830839 c:\users\hein\documents\codeblocks projects\kps\ineterror.h
+	<iostream>
+	<cstring>
+	<stdio.h>
+	<wininet.h>
+
+1524863049 source:c:\users\hein\documents\codeblocks projects\kps\ineterror.cpp
+	"InetError.h"
+
+1524866891 c:\users\hein\documents\codeblocks projects\kps\web.h
+	"Inet.h"
+
+1525002805 source:c:\users\hein\documents\codeblocks projects\kps\web.cpp
+	"Web.h"
+	<sstream>
+	<string>
+	"Inet.h"
+	"Lib.h"
+	"Settings.h"
+	"IO.h"
+
+1524949248 c:\users\hein\documents\codeblocks projects\kps\winapi.h
+	"windows.h"
+
+1525011590 source:c:\users\hein\documents\codeblocks projects\kps\winapi.cpp
+	"WinAPI.h"
+	<Tchar.h>
+	<iostream>
+	"Constants.h"
+	"Settings.h"
+	"Lib.h"
+
+1525011723 c:\users\hein\documents\codeblocks projects\kps\constants.h
+	<tchar.h>
+	<windows.h>
+	<gdiplus.h>
+
+1524838257 source:c:\users\hein\documents\codeblocks projects\kps\constants.cpp
+	"Constants.h"
+	"Settings.h"
+
+1524948727 c:\users\hein\documents\codeblocks projects\kps\lib.h
+	<string>
+
+1524948727 source:c:\users\hein\documents\codeblocks projects\kps\lib.cpp
+	"Lib.h"
+	<chrono>
+	<sys/time.h>
+	<sstream>
+	<iostream>
+
+1524950585 source:c:\users\hein\documents\codeblocks projects\kps\io.cpp
+	"IO.h"
+	<thread>
+	<mutex>
+	<condition_variable>
+	<iostream>
+	<windows.h>
+	<string>
+	"Web.h"
+	"InputHandler.h"
+	"Settings.h"
+
+1524929147 c:\users\hein\documents\codeblocks projects\kps\io.h
+	"InputHandler.h"
+

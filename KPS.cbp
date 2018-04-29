@@ -35,6 +35,19 @@
 					<Add library="wininet" />
 				</Linker>
 			</Target>
+			<Target title="Lite">
+				<Option output="bin/Lite/KPS" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Lite/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option='-D__LITE__=&quot;1&quot;' />
+				</Compiler>
+				<Linker>
+					<Add library="winmm" />
+					<Add library="gdi32" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -48,24 +61,54 @@
 		<Unit filename="Constants.h" />
 		<Unit filename="DrawFunctions.cpp" />
 		<Unit filename="DrawFunctions.h" />
-		<Unit filename="Export.cpp" />
-		<Unit filename="Export.h" />
+		<Unit filename="Export.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Export.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="Graph.cpp" />
 		<Unit filename="Graph.h" />
-		<Unit filename="IO.cpp" />
-		<Unit filename="IO.h" />
-		<Unit filename="Inet.cpp" />
-		<Unit filename="Inet.h" />
-		<Unit filename="InetError.cpp" />
-		<Unit filename="InetError.h" />
+		<Unit filename="IO.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="IO.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Inet.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Inet.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="InetError.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="InetError.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="InputHandler.cpp" />
 		<Unit filename="InputHandler.h" />
 		<Unit filename="Lib.cpp" />
 		<Unit filename="Lib.h" />
 		<Unit filename="Settings.cpp" />
 		<Unit filename="Settings.h" />
-		<Unit filename="Web.cpp" />
-		<Unit filename="Web.h" />
+		<Unit filename="Web.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="Web.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="WinAPI.cpp" />
 		<Unit filename="WinAPI.h" />
 		<Unit filename="WindowInterface.cpp" />

@@ -198,9 +198,9 @@ bool WinAPI::InitUpdateRate(bool &init)
     if(icount<10 && ++icount) return true;
 
     if(one>1000)
-        one = Lib::SysMilliSeconds();
+        one = Lib::Time::SysMilliSeconds();
     else if (two>1000)
-        two = Lib::SysMilliSeconds();
+        two = Lib::Time::SysMilliSeconds();
     else
     {
         // New rate equals diff between two ticks

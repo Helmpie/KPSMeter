@@ -18,6 +18,7 @@ class Settings : public WindowInterface
         bool b_kps_total_keys_on = true;
         bool b_kps_precision_mode = true;
         bool b_kps_decimal_point = false;
+        std::string font = "Bahnschrift Light";
 
         // Graph window settings
         bool b_graph_always_on_top = false;
@@ -35,6 +36,7 @@ class Settings : public WindowInterface
         // Sharing settings
         bool b_share_data = false;
         short share_update_rate = 1000;
+        std::string user = "guest";
 
         // Graph settings
         short graph_update_rate = 350; // in milliseconds
@@ -42,8 +44,6 @@ class Settings : public WindowInterface
         short graph_width = 400;
         short graph_height = 225;
         short graph_top = 65;
-
-        std::string user = "guest";
 
         void ReadSettings();
         void SetReadValue(std::pair<std::string, std::string> val);
@@ -98,6 +98,7 @@ class Settings : public WindowInterface
         short getGraphUpdateRate();
 
         std::string getUser();
+        std::string getFont();
 };
 
 #endif // SETTINGS_H_INCLUDED

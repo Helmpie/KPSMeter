@@ -80,6 +80,8 @@ void Settings::SetReadValue(std::pair<std::string, std::string> val)
         share_update_rate = std::atoi((val.second).c_str());
     else if (val.first == "user")
         user = val.second;
+    else if (val.first == "font")
+        font = val.second;
     else
         std::cout << "Parse error!";
 }
@@ -232,4 +234,9 @@ short Settings::getGraphUpdateRate()
 std::string Settings::getUser()
 {
     return user;
+}
+
+std::string Settings::getFont()
+{
+    return font;
 }

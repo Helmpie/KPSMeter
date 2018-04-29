@@ -22,7 +22,7 @@ Export::~Export()
 void Export::openCSV()
 {
     std::string filename;
-    Lib::SysDateTime(filename);
+    Lib::Time::SysDateTime(filename);
 
     filename += ".csv";
     filename.erase(std::remove(filename.begin(), filename.end(), ':'), filename.end());
@@ -51,7 +51,7 @@ void Export::WriteToCSV()
             total / (Settings::getInstance()->getCSVUpdateRate() / Settings::getInstance()->getCalcUpdateRate());
 
         std::string time;
-        Lib::SysTime(time);
+        Lib::Time::SysTime(time);
 
         file << average;
         file << ",";

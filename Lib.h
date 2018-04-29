@@ -5,11 +5,14 @@
 
 namespace Lib
 {
-    void SysDateTime(std::string &str);
-    void SysTime(std::string &str);
-    void SysTimeStamp(std::string &str);
-    int SysMilliSeconds();
-    void PrintTimeStamp();
+    namespace Time
+    {
+        void SysDateTime(std::string &str);
+        void SysTime(std::string &str);
+        void SysTimeStamp(std::string &str);
+        int SysMilliSeconds();
+        void PrintTimeStamp();
+    }
 }
 
 #endif // LIB_H_INCLUDED

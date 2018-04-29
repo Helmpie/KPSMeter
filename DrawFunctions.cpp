@@ -71,8 +71,8 @@ void Draw::graph(HDC &hdc,
     {
         graphics.DrawLine(&whitePen,
                           i*w_factor, // X1
-                          height-(*dots)[i]*h_factor, // Y1
+                          height - (*dots)[i]*h_factor, // Y1
                           (i+1)*w_factor, // X2
-                          height-(*dots)[i+1]*h_factor); // Y2
+                          height - (*dots)[i+1]*h_factor); // Y2
     }
 }

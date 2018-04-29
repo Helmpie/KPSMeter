@@ -75,7 +75,7 @@ bool Web::Update(const std::string& data)
     if(connected)
     {
         std::string time;
-        Lib::SysTime(time);
+        Lib::Time::SysTime(time);
 
         std::stringstream JSON;
         JSON << "{"

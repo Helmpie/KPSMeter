@@ -1,4 +1,4 @@
-cscope 15 $HOME\Documents\CodeBlocks Projects\KPS"               0000045980
+cscope 15 $HOME\Documents\CodeBlocks Projects\KPS"               0000046943
 	@C:\Users\Hein\DOCUME~1\CODEBL~1\KPS\CONSTA~1.CPP
 
 1 
@@ -845,24 +845,12 @@ dŸs
 	$Exp‹t
 ()
 
-14 
-div
- = 
-Sëtögs
-::
-	`gëIn°™˚
-()->
-	`gëCSVUpd©eR©e
-(Ë/ Sëtögs::gëIn°™˚()->
-	`gëCÆcUpd©eR©e
-();
-
 15 
 	}
 }
 
 17 
-	gExp‹t
+Exp‹t
 ::~
 	$Exp‹t
 ()
@@ -985,13 +973,21 @@ fûe
 
 50 
 avîage
- = 
-tŸÆ
-/
-div
-;
+ =
 
-52 
+51 
+tŸÆ
+ / (
+Sëtögs
+::
+	`gëIn°™˚
+()->
+	`gëCSVUpd©eR©e
+(Ë/ Sëtögs::gëIn°™˚()->
+	`gëCÆcUpd©eR©e
+());
+
+53 
 °d
 ::
 °rög
@@ -999,7 +995,7 @@ div
 time
 ;
 
-53 
+54 
 Lib
 ::
 	`SysTime
@@ -1007,31 +1003,31 @@ Lib
 time
 );
 
-55 
+56 
 fûe
  << 
 avîage
 ;
 
-56 
+57 
 fûe
  << ",";
 
-57 
+58 
 fûe
  << 
 time
 ;
 
-58 
+59 
 fûe
  << "\n";
 
-60 
+61 
 tŸÆ
  = 0;
 
-62 
+63 
 	}
 }
 
@@ -1097,11 +1093,7 @@ WrôeToCSV
 tŸÆ
  = 0;
 
-21 
-	mdiv
- = 1;
-
-22 
+21 
 	m°d
 ::
 of°ªam
@@ -1651,85 +1643,65 @@ Sëtögs
 	`gëCÆcQueueSize
 ();
 
-12 
-deque_div
- = ()
-deque_size
- / (1000/()
-Sëtögs
-::
-	`gëIn°™˚
-()->
-	`gëCÆcUpd©eR©e
-());
-
-13 
-≠¥_div
- = ()(1000-
-Sëtögs
-::
-	`gëIn°™˚
-()->
-	`gëCÆcUpd©eR©e
-()) / 1000;
-
-16 
+14 
 i
 =0;i<
 deque_size
-;i++Ë{ 
+;i++)
+
+15 
 key_que
 .
 	`push_back
-(0); }
+(0);
 
-17 
+16 
 	}
 }
 
-19 
+18 
 	gI≈utH™dÀr
 ::~
 	$I≈utH™dÀr
 ()
 
-22 
+21 
 	}
 }
 
-24 
+23 
 I≈utH™dÀr
 ::
 	$keydown
 ()
 
-26 
+25 
 keycou¡
 ++;
 
-27 
+26 
 tŸÆ_keys
 ++;
 
-28 
+27 
 	}
 }
 
-30 
+29 
 	gI≈utH™dÀr
 ::
 	$Re£tMaxKps
 ()
 
-32 
+31 
 max_kps
  = 0;
 
-33 
+32 
 kps
  = -1;
 
-35 i‡–
+34 i‡–
 Sëtögs
 ::
 	`gëIn°™˚
@@ -1737,7 +1709,7 @@ Sëtögs
 	`Pªcisi⁄ModeOn
 () )
 
-37 
+36 
 i
 =0;i<
 deque_size
@@ -1745,59 +1717,63 @@ deque_size
 key_que
 [i] = 0; }
 
-39 
+38 
 	}
 }
 
-41 
+40 
 	gI≈utH™dÀr
 ::
 	$ˇlcuœã_kps_≠r
 ()
 
-43 
+42 
 kps
- = kps*
-≠¥_div
-;
+ = kp†* ( ()(1000-
+Sëtögs
+::
+	`gëIn°™˚
+()->
+	`gëCÆcUpd©eR©e
+()) / 1000 );
 
-44 
+43 
 kps
  +
 keycou¡
 ;
 
-45 
+44 
 keycou¡
  = 0;
 
-47 i‡(
+46 i‡(
 kps
  > 
 max_kps
 ) {max_kps=kps;}
 
-48 
+47 
 	}
 }
 
-50 
+49 
 	gI≈utH™dÀr
 ::
 	$ˇlcuœã_kps_¥ec
 ()
 
-52 
+51 
 kps
  = 0;
 
-53 
+52 
 key_que
 .
 	`p›_back
 ();
 
-54 
+53 
 key_que
 .
 	`push_‰⁄t
@@ -1805,13 +1781,13 @@ key_que
 keycou¡
 );
 
-56 
+55 
 i
 =0;i<
 deque_size
 ;i++)
 
-58 
+57 
 kps
  +
 key_que
@@ -1819,33 +1795,39 @@ key_que
 i
 ];
 
-61 
+60 
 kps
- = kps/
-deque_div
-;
+ = kp†/ ( ()
+deque_size
+ / ( 1000/ ()
+Sëtögs
+::
+	`gëIn°™˚
+()->
+	`gëCÆcUpd©eR©e
+() ) );
 
-63 
+62 
 keycou¡
  = 0;
 
-65 i‡(
+64 i‡(
 kps
  > 
 max_kps
 )
 
-67 
+66 
 max_kps
 =
 kps
 ;
 
-69 
+68 
 	}
 }
 
-71 
+70 
 öt16_t
  
 	gI≈utH™dÀr
@@ -1853,29 +1835,29 @@ kps
 	$gëKeycou¡
 ()
 
-73  
+72  
 keycou¡
 ;
 
-74 
+73 
 	}
 }
 
-76 
+75 
 	gI≈utH™dÀr
 ::
 	$gëKps
 ()
 
-78  
+77  
 kps
 ;
 
-79 
+78 
 	}
 }
 
-81 
+80 
 	g°d
 ::
 °rög
@@ -1885,7 +1867,7 @@ I≈utH™dÀr
 	$gëKpsSå
 ()
 
-83 if(
+82 if(
 Sëtögs
 ::
 	`gëIn°™˚
@@ -1893,7 +1875,7 @@ Sëtögs
 	`DecimÆPoötOn
 ())
 
-85 
+84 
 °d
 ::
 °rög°ªam
@@ -1901,7 +1883,7 @@ Sëtögs
 ss
 ;
 
-86 
+85 
 ss
  << 
 °d
@@ -1913,13 +1895,13 @@ fixed
 kps
 ;
 
-87  
+86  
 ss
 .
 	`°r
 ();
 
-91  
+90  
 °d
 ::
 	`to_°rög
@@ -1929,11 +1911,11 @@ ss
 kps
 ));
 
-93 
+92 
 	}
 }
 
-95 
+94 
 	g°d
 ::
 °rög
@@ -1943,7 +1925,7 @@ I≈utH™dÀr
 	$gëMaxKpsSå
 ()
 
-97  
+96  
 °d
 ::
 	`to_°rög
@@ -1953,11 +1935,11 @@ I≈utH™dÀr
 max_kps
 ));
 
-98 
+97 
 	}
 }
 
-100 
+99 
 	g°d
 ::
 °rög
@@ -1967,7 +1949,7 @@ I≈utH™dÀr
 	$gëTŸÆKpsSå
 ()
 
-102  
+101  
 °d
 ::
 	`to_°rög
@@ -1975,7 +1957,7 @@ I≈utH™dÀr
 tŸÆ_keys
 );
 
-103 
+102 
 	}
 }
 
@@ -2193,19 +2175,7 @@ I≈utH™dÀr
 	gtŸÆ_kps
 ;
 
-18 
-	gweb_div
- = 
-Sëtögs
-::
-gëIn°™˚
-()->
-gëSh¨eUpd©eR©e
-(Ë/ Sëtögs::gëIn°™˚()->
-gëCÆcWöUpd©eR©e
-();
-
-20 
+19 
 boﬁ
  
 	ggo
@@ -2213,7 +2183,7 @@ boﬁ
 åue
 ;
 
-21 
+20 
 boﬁ
  
 	ga˘ive
@@ -2221,27 +2191,27 @@ boﬁ
 Ál£
 ;
 
-23 
+22 
 	$Sh¨eD©a
 ()
 
-25 
+24 
 Web
  
 web
 ;
 
-26 
+25 
 web
 .
 	`O≥nC⁄√˘
 ();
 
-28 
+27 
 go
 )
 
-31 
+29 
 go
  = 
 web
@@ -2251,11 +2221,25 @@ web
 °d
 ::
 	`to_°rög
-–(
+(
+
+30 –
 tŸÆ_kps
- / 
-web_div
-) ) );
+ / ( 
+Sëtögs
+::
+	`gëIn°™˚
+()->
+	`gëSh¨eUpd©eR©e
+() /
+
+31 
+Sëtögs
+::
+	`gëIn°™˚
+()->
+	`gëCÆcUpd©eR©e
+() ) ) ) );
 
 32 
 tŸÆ_kps
@@ -3287,13 +3271,43 @@ buf„r
 	}
 }
 
-42 
+42 
+	gLib
+::
+	$SysMûliSec⁄ds
+()
+
+44 
+timevÆ
+ 
+curTime
+;
+
+45 
+	`gëtimeofday
+(&
+curTime
+, 
+NULL
+);
+
+46  
+curTime
+.
+tv_u£c
+ / 1000;
+
+47 
+	}
+}
+
+49 
 	gLib
 ::
 	$PrötTimeSèmp
 ()
 
-44 
+51 
 °d
 ::
 °rög
@@ -3301,7 +3315,7 @@ buf„r
 °r
 ;
 
-45 
+52 
 Lib
 ::
 	`SysTimeSèmp
@@ -3309,7 +3323,7 @@ Lib
 °r
 );
 
-46 
+53 
 °d
 ::
 cout
@@ -3319,7 +3333,7 @@ cout
 ídl
 ;
 
-47 
+54 
 	}
 }
 
@@ -3375,7 +3389,11 @@ SysTimeSèmp
 °r
 );
 
-11 
+11 
+SysMûliSec⁄ds
+();
+
+12 
 PrötTimeSèmp
 ();
 
@@ -3401,11 +3419,7 @@ PrötTimeSèmp
 	~<°rög
 >
 
-6 
-	~<utûôy
->
-
-8 
+7 
 Sëtögs
 * 
 	gSëtögs
@@ -3413,7 +3427,7 @@ Sëtögs
 ö°™˚
  = 0;
 
-10 
+9 
 Sëtögs
 * 
 	gSëtögs
@@ -3421,11 +3435,11 @@ Sëtögs
 	$gëIn°™˚
 ()
 
-12 i‡(
+11 i‡(
 ö°™˚
  == 0)
 
-14 
+13 
 ö°™˚
  = 
 √w
@@ -3433,45 +3447,45 @@ Sëtögs
 	`Sëtögs
 ();
 
-17  
+16  
 ö°™˚
 ;
 
-18 
+17 
 	}
 }
 
-20 
+19 
 	gSëtögs
 ::
 	$Sëtögs
 ()
 
-22 
+21 
 	`RódSëtögs
 ();
 
-23 
+22 
 	}
 }
 
-25 
+24 
 	gSëtögs
 ::~
 	$Sëtögs
 ()
 
-28 
+27 
 	}
 }
 
-30 
+29 
 Sëtögs
 ::
 	$RódSëtögs
 ()
 
-32 
+31 
 °d
 ::
 °rög
@@ -3479,7 +3493,7 @@ Sëtögs
 löe
 ;
 
-33 
+32 
 °d
 ::
 if°ªam
@@ -3487,13 +3501,13 @@ if°ªam
 	`fûe_öi
 ("config.txt");
 
-34 if(
+33 if(
 fûe_öi
 .
 	`is_›í
 ())
 
-36 
+35 
 	`gëlöe
 (
 fûe_öi
@@ -3501,11 +3515,11 @@ fûe_öi
 löe
 ))
 
-38 if(
+37 if(
 löe
 [0]!='/')
 
-40 
+39 
 size_t
  
 pos
@@ -3515,17 +3529,17 @@ löe
 	`föd
 (" = ");
 
-42 
+41 
 °d
 ::
 ∑ú
 <°d::
 °rög
-, > 
+, std::°rög> 
 vÆ
 ;
 
-43 
+42 
 vÆ
 .
 fú°
@@ -3537,47 +3551,41 @@ löe
 pos
 );
 
-44 
+43 
 vÆ
 .
 £c⁄d
  = 
-°d
-::
-	`©oi
-(
 löe
 .
 	`sub°r
 (
 pos
-+2).
-	`c_°r
-());
++3);
 
-46 
+45 
 	`SëRódVÆue
 (
 vÆ
 );
 
-52 
+51 
 °d
 ::
 cout
  << "FailedÅo open config";
 
-55 
+54 
 fûe_öi
 .
 	`˛o£
 ();
 
-56 
+55 
 	}
 }
 
-58 
+57 
 	gSëtögs
 ::
 SëRódVÆue
@@ -3587,171 +3595,237 @@ SëRódVÆue
 ∑ú
 <°d::
 °rög
-, > 
+, std::°rög> 
 vÆ
 )
 
-60 i‡(
-	gvÆ
+59 i‡(
+vÆ
 .
-	gfú°
+fú°
  == "graph_update_rate")
 
-61 
+60 
 gøph_upd©e_øã
  = 
+°d
+::
+©oi
+((
 vÆ
 .
 £c⁄d
-;
+).
+c_°r
+());
 
-62 i‡(
+61 i‡(
 	gvÆ
 .
 	gfú°
  == "graph_precision")
 
-63 
+62 
 gøph_¥ecisi⁄
  = 
+°d
+::
+©oi
+((
 vÆ
 .
 £c⁄d
-;
+).
+c_°r
+());
 
-64 i‡(
+63 i‡(
 	gvÆ
 .
 	gfú°
  == "graph_width")
 
-65 
+64 
 gøph_width
  = 
+°d
+::
+©oi
+((
 vÆ
 .
 £c⁄d
-;
+).
+c_°r
+());
 
-66 i‡(
+65 i‡(
 	gvÆ
 .
 	gfú°
  == "graph_height")
 
-67 
+66 
 gøph_height
  = 
+°d
+::
+©oi
+((
 vÆ
 .
 £c⁄d
-;
+).
+c_°r
+());
 
-68 i‡(
+67 i‡(
 	gvÆ
 .
 	gfú°
  == "graph_top")
 
-69 
+68 
 gøph_t›
  = 
+°d
+::
+©oi
+((
 vÆ
 .
 £c⁄d
-;
+).
+c_°r
+());
 
-70 i‡(
+69 i‡(
 	gvÆ
 .
 	gfú°
  == "generate_csv")
 
-71 
+70 
 b_gíî©e_csv
  = 
+°d
+::
+©oi
+((
 vÆ
 .
 £c⁄d
-;
+).
+c_°r
+());
 
-72 i‡(
+71 i‡(
 	gvÆ
 .
 	gfú°
  == "csv_update_rate")
 
-73 
+72 
 csv_upd©e_øã
  = 
+°d
+::
+©oi
+((
 vÆ
 .
 £c⁄d
-;
+).
+c_°r
+());
 
-74 i‡(
+73 i‡(
 	gvÆ
 .
 	gfú°
  == "calc_queue_size")
 
-75 
+74 
 ˇlc_queue_size
  = 
+°d
+::
+©oi
+((
 vÆ
 .
 £c⁄d
-;
+).
+c_°r
+());
 
-76 i‡(
+75 i‡(
 	gvÆ
 .
 	gfú°
  == "calc_update_rate")
 
-77 
+76 
 ˇlc_upd©e_øã
  = 
+°d
+::
+©oi
+((
 vÆ
 .
 £c⁄d
-;
+).
+c_°r
+());
 
-78 i‡(
+77 i‡(
 	gvÆ
 .
 	gfú°
  == "calc_win_update_rate")
 
-79 
+78 
 ˇlc_wö_upd©e_øã
  = 
+°d
+::
+©oi
+((
 vÆ
 .
 £c⁄d
-;
+).
+c_°r
+());
 
-80 i‡(
+79 i‡(
 	gvÆ
 .
 	gfú°
  == "share_update_rate")
 
-81 
+80 
 sh¨e_upd©e_øã
  = 
+°d
+::
+©oi
+((
 vÆ
 .
 £c⁄d
-;
+).
+c_°r
+());
 
-82 i‡(
+81 i‡(
 	gvÆ
 .
 	gfú°
  == "user")
 
-83 
+82 
 u£r
  = 
 vÆ
@@ -3759,27 +3833,27 @@ vÆ
 £c⁄d
 ;
 
-85 
+84 
 	g°d
 ::
 cout
  << "ParseÉrror!";
 
-88 
+87 
 	gSëtögs
 ::
 	$ToggÀKPSAlwaysOnT›
 ()
 
-90 
+89 
 b_kps_Æways_⁄_t›
  = !b_kps_always_on_top;
 
-91 
+90 
 	}
 }
 
-93 
+92 
 boﬁ
  
 	gSëtögs
@@ -3787,29 +3861,29 @@ boﬁ
 	$KPSWödowIsAOT
 ()
 
-95  
+94  
 b_kps_Æways_⁄_t›
 ;
 
-96 
+95 
 	}
 }
 
-98 
+97 
 	gSëtögs
 ::
 	$ToggÀKPSWödowB‹dîs
 ()
 
-100 
+99 
 b_kps_wödow_has_b‹dîs
  = !b_kps_window_has_borders;
 
-101 
+100 
 	}
 }
 
-103 
+102 
 boﬁ
  
 	gSëtögs
@@ -3817,29 +3891,29 @@ boﬁ
 	$KPSWödowHasB‹dîs
 ()
 
-105  
+104  
 b_kps_wödow_has_b‹dîs
 ;
 
-106 
+105 
 	}
 }
 
-108 
+107 
 	gSëtögs
 ::
 	$ToggÀGøphAlwaysOnT›
 ()
 
-110 
+109 
 b_gøph_Æways_⁄_t›
  = !b_graph_always_on_top;
 
-111 
+110 
 	}
 }
 
-113 
+112 
 boﬁ
  
 	gSëtögs
@@ -3847,29 +3921,29 @@ boﬁ
 	$GøphWödowIsAOT
 ()
 
-115  
+114  
 b_gøph_Æways_⁄_t›
 ;
 
-116 
+115 
 	}
 }
 
-118 
+117 
 	gSëtögs
 ::
 	$ToggÀGøphWödowB‹dîs
 ()
 
-120 
+119 
 b_gøph_wödow_has_b‹dîs
  = !b_graph_window_has_borders;
 
-121 
+120 
 	}
 }
 
-123 
+122 
 boﬁ
  
 	gSëtögs
@@ -3877,29 +3951,29 @@ boﬁ
 	$GøphWödowHasB‹dîs
 ()
 
-125  
+124  
 b_gøph_wödow_has_b‹dîs
 ;
 
-126 
+125 
 	}
 }
 
-128 
+127 
 	gSëtögs
 ::
 	$ToggÀPªcisi⁄Mode
 ()
 
-130 
+129 
 b_kps_¥ecisi⁄_mode
  = !b_kps_precision_mode;
 
-131 
+130 
 	}
 }
 
-133 
+132 
 boﬁ
  
 	gSëtögs
@@ -3907,29 +3981,29 @@ boﬁ
 	$Pªcisi⁄ModeOn
 ()
 
-135  
+134  
 b_kps_¥ecisi⁄_mode
 ;
 
-136 
+135 
 	}
 }
 
-138 
+137 
 	gSëtögs
 ::
 	$ToggÀTŸÆKeys
 ()
 
-140 
+139 
 b_kps_tŸÆ_keys_⁄
  = !b_kps_total_keys_on;
 
-141 
+140 
 	}
 }
 
-143 
+142 
 boﬁ
  
 	gSëtögs
@@ -3937,29 +4011,29 @@ boﬁ
 	$TŸÆKeysOn
 ()
 
-145  
+144  
 b_kps_tŸÆ_keys_⁄
 ;
 
-146 
+145 
 	}
 }
 
-148 
+147 
 	gSëtögs
 ::
 	$ToggÀDecimÆPoöt
 ()
 
-150 
+149 
 b_kps_decimÆ_poöt
  = !b_kps_decimal_point;
 
-151 
+150 
 	}
 }
 
-153 
+152 
 boﬁ
  
 	gSëtögs
@@ -3967,29 +4041,29 @@ boﬁ
 	$DecimÆPoötOn
 ()
 
-155  
+154  
 b_kps_decimÆ_poöt
 ;
 
-156 
+155 
 	}
 }
 
-158 
+157 
 	gSëtögs
 ::
 	$ToggÀGíî©eCSV
 ()
 
-160 
+159 
 b_gíî©e_csv
  = !b_generate_csv;
 
-161 
+160 
 	}
 }
 
-163 
+162 
 boﬁ
  
 	gSëtögs
@@ -3997,43 +4071,43 @@ boﬁ
 	$gëGíî©eCSV
 ()
 
-165  
+164  
 b_gíî©e_csv
 ;
 
-166 
+165 
 	}
 }
 
-168 
+167 
 	gSëtögs
 ::
 	$gëCSVUpd©eR©e
 ()
 
-170  
+169  
 csv_upd©e_øã
 ;
 
-171 
+170 
 	}
 }
 
-173 
+172 
 	gSëtögs
 ::
 	$ToggÀSh¨eD©a
 ()
 
-175 
+174 
 b_sh¨e_d©a
  = !b_share_data;
 
-176 
+175 
 	}
 }
 
-178 
+177 
 boﬁ
  
 	gSëtögs
@@ -4041,141 +4115,159 @@ boﬁ
 	$Sh¨eD©aOn
 ()
 
-180  
+179  
 b_sh¨e_d©a
 ;
 
-181 
+180 
 	}
 }
 
-183 
+182 
 	gSëtögs
 ::
 	$gëSh¨eUpd©eR©e
 ()
 
-185  
+184  
 sh¨e_upd©e_øã
 ;
 
-186 
+185 
 	}
 }
 
-188 
+187 
+	gSëtögs
+::
+	$£tCÆcUpd©eR©e
+(
+øã
+)
+
+189 
+ˇlc_upd©e_øã
+ = 
+øã
+;
+
+190 
+	}
+}
+
+192 
 	gSëtögs
 ::
 	$gëCÆcQueueSize
 ()
 
-190  
+194  
 ˇlc_queue_size
 ;
 
-191 
+195 
 	}
 }
 
-193 
+197 
 	gSëtögs
 ::
 	$gëCÆcUpd©eR©e
 ()
 
-195  
+199  
 ˇlc_upd©e_øã
 ;
 
-196 
+200 
 	}
 }
 
-198 
+202 
 	gSëtögs
 ::
 	$gëCÆcWöUpd©eR©e
 ()
 
-200  
+204  
 ˇlc_wö_upd©e_øã
 ;
 
-201 
+205 
 	}
 }
 
-203 
+207 
 	gSëtögs
 ::
 	$gëGøphPªcisi⁄
 ()
 
-205  
+209  
 gøph_¥ecisi⁄
 ;
 
-206 
+210 
 	}
 }
 
-208 
+212 
 	gSëtögs
 ::
 	$gëGøphWidth
 ()
 
-210  
+214  
 gøph_width
 ;
 
-211 
+215 
 	}
 }
 
-213 
+217 
 	gSëtögs
 ::
 	$gëGøphHeight
 ()
 
-215  
+219  
 gøph_height
 ;
 
-216 
+220 
 	}
 }
 
-218 
+222 
 	gSëtögs
 ::
 	$gëGøphT›
 ()
 
-220  
+224  
 gøph_t›
 ;
 
-221 
+225 
 	}
 }
 
-223 
+227 
 	gSëtögs
 ::
 	$gëGøphUpd©eR©e
 ()
 
-225  
+229  
 gøph_upd©e_øã
 ;
 
-226 
+230 
 	}
 }
 
-228 
+232 
 	g°d
 ::
 °rög
@@ -4185,11 +4277,11 @@ Sëtögs
 	$gëU£r
 ()
 
-230  
+234  
 u£r
 ;
 
-231 
+235 
 	}
 }
 
@@ -4210,14 +4302,10 @@ SETTINGS_H_INCLUDED
 "
 
 5 
-	~<utûôy
->
-
-6 
 	~<°rög
 >
 
-8 ˛as†
+7 ˛as†
 	cSëtögs
  : 
 public
@@ -4225,25 +4313,25 @@ public
 WödowI¡îÁ˚
 
 
-10 
+9 
 ¥iv©e
 :
 
-11 
+10 
 Sëtögs
 * 
 ö°™˚
 ;
 
-13 
+12 
 Sëtögs
 ();
 
-14 ~
+13 ~
 Sëtögs
 ();
 
-17 
+16 
 boﬁ
  
 	mb_kps_Æways_⁄_t›
@@ -4251,7 +4339,7 @@ boﬁ
 Ál£
 ;
 
-18 
+17 
 boﬁ
  
 	mb_kps_wödow_has_b‹dîs
@@ -4259,7 +4347,7 @@ boﬁ
 åue
 ;
 
-19 
+18 
 boﬁ
  
 	mb_kps_tŸÆ_keys_⁄
@@ -4267,7 +4355,7 @@ boﬁ
 åue
 ;
 
-20 
+19 
 boﬁ
  
 	mb_kps_¥ecisi⁄_mode
@@ -4275,7 +4363,7 @@ boﬁ
 åue
 ;
 
-21 
+20 
 boﬁ
  
 	mb_kps_decimÆ_poöt
@@ -4283,7 +4371,7 @@ boﬁ
 Ál£
 ;
 
-24 
+23 
 boﬁ
  
 	mb_gøph_Æways_⁄_t›
@@ -4291,7 +4379,7 @@ boﬁ
 Ál£
 ;
 
-25 
+24 
 boﬁ
  
 	mb_gøph_wödow_has_b‹dîs
@@ -4299,19 +4387,19 @@ boﬁ
 åue
 ;
 
-28 
+27 
 	mˇlc_queue_size
  = 20;
 
-29 
+28 
 	mˇlc_upd©e_øã
  = 50;
 
-30 
+29 
 	mˇlc_wö_upd©e_øã
  = 50;
 
-33 
+32 
 boﬁ
  
 	mb_gíî©e_csv
@@ -4319,11 +4407,11 @@ boﬁ
 Ál£
 ;
 
-34 
+33 
 	mcsv_upd©e_øã
  = 5000;
 
-37 
+36 
 boﬁ
  
 	mb_sh¨e_d©a
@@ -4331,31 +4419,31 @@ boﬁ
 Ál£
 ;
 
-38 
+37 
 	msh¨e_upd©e_øã
  = 1000;
 
-41 
+40 
 	mgøph_upd©e_øã
  = 350;
 
-42 
+41 
 	mgøph_¥ecisi⁄
  = 150;
 
-43 
+42 
 	mgøph_width
  = 400;
 
-44 
+43 
 	mgøph_height
  = 225;
 
-45 
+44 
 	mgøph_t›
  = 65;
 
-47 
+46 
 	m°d
 ::
 °rög
@@ -4363,11 +4451,11 @@ boﬁ
 u£r
  = "guest";
 
-49 
+48 
 RódSëtögs
 ();
 
-50 
+49 
 SëRódVÆue
 (
 °d
@@ -4375,117 +4463,123 @@ SëRódVÆue
 ∑ú
 <°d::
 °rög
-, > 
+, std::°rög> 
 vÆ
 );
 
-52 
+51 
 	mpublic
 :
 
-53 
+52 
 Sëtögs
 * 
 gëIn°™˚
 ();
 
-56 
+55 
 ToggÀKPSAlwaysOnT›
 ();
 
-57 
+56 
 boﬁ
  
 KPSWödowIsAOT
 ();
 
-59 
+58 
 ToggÀGøphAlwaysOnT›
 ();
 
-60 
+59 
 boﬁ
  
 GøphWödowIsAOT
 ();
 
-63 
+62 
 ToggÀKPSWödowB‹dîs
 ();
 
-64 
+63 
 boﬁ
  
 KPSWödowHasB‹dîs
 ();
 
-66 
+65 
 ToggÀGøphWödowB‹dîs
 ();
 
-67 
+66 
 boﬁ
  
 GøphWödowHasB‹dîs
 ();
 
-70 
+69 
 ToggÀPªcisi⁄Mode
 ();
 
-71 
+70 
 boﬁ
  
 Pªcisi⁄ModeOn
 ();
 
-74 
+73 
 ToggÀTŸÆKeys
 ();
 
-75 
+74 
 boﬁ
  
 TŸÆKeysOn
 ();
 
-77 
+76 
 ToggÀDecimÆPoöt
 ();
 
-78 
+77 
 boﬁ
  
 DecimÆPoötOn
 ();
 
-80 
+79 
 ToggÀGíî©eCSV
 ();
 
-81 
+80 
 boﬁ
  
 gëGíî©eCSV
 ();
 
-83 
+82 
 gëCSVUpd©eR©e
 ();
 
-85 
+84 
 ToggÀSh¨eD©a
 ();
 
-86 
+85 
 boﬁ
  
 Sh¨eD©aOn
 ();
 
-88 
+87 
 gëSh¨eUpd©eR©e
 ();
+
+89 
+£tCÆcUpd©eR©e
+(
+øã
+);
 
 90 
 gëCÆcQueueSize
@@ -5143,15 +5237,23 @@ boﬁ
 	~<Tch¨.h
 >
 
-5 
+4 
+	~<io°ªam
+>
+
+6 
 	~"C⁄°™ts.h
 "
 
-6 
+7 
 	~"Sëtögs.h
 "
 
-8 
+8 
+	~"Lib.h
+"
+
+10 
 boﬁ
  
 	gWöAPI
@@ -5163,31 +5265,31 @@ WNDCLASSEX
 wc
 ,
 
-9 
+11 
 HWND
 & 
 hwnd
 ,
 
-10 
+12 
 MSG
 & 
 Msg
 ,
 
-11 
+13 
 HINSTANCE
 & 
 hIn°™˚
 ,
 
-12 
+14 
 wödowInf‹m©i⁄
 & 
 wi
 )
 
-15 
+17 
 wc
 .
 cbSize
@@ -5195,13 +5297,13 @@ cbSize
 WNDCLASSEX
 );
 
-16 
+18 
 wc
 .
 °yÀ
  = 0;
 
-17 
+19 
 wc
 .
 Õ‚WndProc
@@ -5211,25 +5313,25 @@ wi
 WndProc
 ;
 
-18 
+20 
 wc
 .
 cbClsExåa
  = 0;
 
-19 
+21 
 wc
 .
 cbWndExåa
  = 0;
 
-20 
+22 
 wc
 .
 hIn°™˚
  = hInstance;
 
-21 
+23 
 wc
 .
 hIc⁄
@@ -5241,7 +5343,7 @@ NULL
 IDI_APPLICATION
 );
 
-22 
+24 
 wc
 .
 hCurs‹
@@ -5253,7 +5355,7 @@ NULL
 IDC_ARROW
 );
 
-23 if(
+25 if(
 wi
 .
 bg
@@ -5261,7 +5363,7 @@ bg
 NULL
 )
 
-25 
+27 
 wc
 .
 hbrBackground
@@ -5271,7 +5373,7 @@ hbrBackground
 	`RGB
 (0, 0, 0));
 
-29 
+31 
 wc
 .
 hbrBackground
@@ -5289,17 +5391,17 @@ wi
 bg
 ),
 
-30 
+32 
 IMAGE_BITMAP
 ,0,0,
 
-31 
+33 
 LR_CREATEDIBSECTION
 |
 LR_LOADFROMFILE
 ));
 
-35 
+37 
 wc
 .
 ÕszMíuName
@@ -5307,7 +5409,7 @@ wc
 NULL
 ;
 
-36 
+38 
 wc
 .
 ÕszCœssName
@@ -5317,7 +5419,7 @@ wi
 g_szCœssName
 ;
 
-37 
+39 
 wc
 .
 hIc⁄Sm
@@ -5329,47 +5431,47 @@ NULL
 IDI_APPLICATION
 );
 
-39 if(!
+41 if(!
 	`Regi°îCœssEx
 (&
 wc
 ))
 
-41 
+43 
 	`MesßgeBox
 (
 NULL
 , "Window Registration Failed!", "Error!",
 
-42 
+44 
 MB_ICONEXCLAMATION
  | 
 MB_OK
 );
 
-47 
+49 
 hwnd
  = 
 	`Cª©eWödowEx
 (
 
-48 
+50 
 WS_EX_CLIENTEDGE
 ,
 
-49 
+51 
 wi
 .
 g_szCœssName
 ,
 
-50 
+52 
 wi
 .
 tôÀ
 ,
 
-52 (
+54 (
 WS_OVERLAPPED
  | 
 WS_CAPTION
@@ -5379,7 +5481,7 @@ WS_SYSMENU
 WS_MINIMIZEBOX
  ),
 
-53 
+55 
 CW_USEDEFAULT
 , CW_USEDEFAULT, 
 wi
@@ -5389,35 +5491,35 @@ width
 height
 ,
 
-54 
+56 
 NULL
 , NULL, 
 hIn°™˚
 , NULL);
 
-56 if(
+58 if(
 hwnd
  =
 NULL
 )
 
-58 
+60 
 	`MesßgeBox
 (
 NULL
 , "Window Creation Failed!", "Error!",
 
-59 
+61 
 MB_ICONEXCLAMATION
  | 
 MB_OK
 );
 
-64 
+66 
 	}
 }
 
-66 
+68 
 	gWöAPI
 ::
 	$Cª©eRightClickMíuKPS
@@ -5427,19 +5529,19 @@ HWND
 hwnd
 )
 
-69 
+71 
 POINT
  
 p
 ;
 
-70 
+72 
 	`GëCurs‹Pos
 (&
 p
 );
 
-73 
+75 
 HMENU
  
 hMíu
@@ -5447,7 +5549,7 @@ hMíu
 	`Cª©eP›upMíu
 ();
 
-76 i‡–
+78 i‡–
 Sëtögs
 ::
 	`gëIn°™˚
@@ -5455,7 +5557,7 @@ Sëtögs
 	`KPSWödowIsAOT
 () )
 
-78 ::
+80 ::
 	`AµídMíu
 (
 hMíu
@@ -5467,7 +5569,7 @@ COMM_AOT
 	`_T
 ("Always onÅop"));
 
-82 ::
+84 ::
 	`AµídMíu
 (
 hMíu
@@ -5479,7 +5581,7 @@ COMM_AOT
 	`_T
 ("Always onÅop"));
 
-94 i‡–
+96 i‡–
 Sëtögs
 ::
 	`gëIn°™˚
@@ -5487,7 +5589,7 @@ Sëtögs
 	`Pªcisi⁄ModeOn
 () )
 
-96 ::
+98 ::
 	`AµídMíu
 (
 hMíu
@@ -5499,7 +5601,7 @@ COMM_PREC
 	`_T
 ("Precision Mode"));
 
-100 ::
+102 ::
 	`AµídMíu
 (
 hMíu
@@ -5511,7 +5613,7 @@ COMM_PREC
 	`_T
 ("Precision Mode"));
 
-103 i‡–
+105 i‡–
 Sëtögs
 ::
 	`gëIn°™˚
@@ -5519,7 +5621,7 @@ Sëtögs
 	`TŸÆKeysOn
 () )
 
-105 ::
+107 ::
 	`AµídMíu
 (
 hMíu
@@ -5531,7 +5633,7 @@ COMM_TOT
 	`_T
 ("Show Total Keys"));
 
-109 ::
+111 ::
 	`AµídMíu
 (
 hMíu
@@ -5543,7 +5645,11 @@ COMM_TOT
 	`_T
 ("Show Total Keys"));
 
-112 i‡–
+113 #i‚de‡
+__LITE__
+
+
+114 i‡–
 Sëtögs
 ::
 	`gëIn°™˚
@@ -5551,7 +5657,7 @@ Sëtögs
 	`gëGíî©eCSV
 () )
 
-114 ::
+116 ::
 	`AµídMíu
 (
 hMíu
@@ -5563,7 +5669,7 @@ COMM_CSV
 	`_T
 ("Generate CSV file"));
 
-118 ::
+120 ::
 	`AµídMíu
 (
 hMíu
@@ -5575,7 +5681,7 @@ COMM_CSV
 	`_T
 ("Generate CSV file"));
 
-121 i‡–
+123 i‡–
 Sëtögs
 ::
 	`gëIn°™˚
@@ -5583,7 +5689,7 @@ Sëtögs
 	`Sh¨eD©aOn
 () )
 
-123 ::
+125 ::
 	`AµídMíu
 (
 hMíu
@@ -5595,7 +5701,7 @@ COMM_SHR
 	`_T
 ("Share data"));
 
-127 ::
+129 ::
 	`AµídMíu
 (
 hMíu
@@ -5607,7 +5713,7 @@ COMM_SHR
 	`_T
 ("Share data"));
 
-130 i‡–
+132 i‡–
 Sëtögs
 ::
 	`gëIn°™˚
@@ -5615,7 +5721,7 @@ Sëtögs
 	`DecimÆPoötOn
 () )
 
-132 ::
+134 ::
 	`AµídMíu
 (
 hMíu
@@ -5627,7 +5733,7 @@ COMM_DEC
 	`_T
 ("Show decimalÖoint"));
 
-136 ::
+138 ::
 	`AµídMíu
 (
 hMíu
@@ -5639,41 +5745,41 @@ COMM_DEC
 	`_T
 ("Show decimalÖoint"));
 
-140 
+142 
 	`TøckP›upMíu
 –
 hMíu
 ,
 
-141 
+143 
 TPM_RIGHTBUTTON
 ,
 
-142 
+144 
 p
 .
 x
 ,
 
-143 
+145 
 p
 .
 y
 ,
 
-145 
+147 
 hwnd
 ,
 
-146 
+148 
 NULL
 );
 
-147 
+149 
 	}
 }
 
-149 
+151 
 	gWöAPI
 ::
 	$Cª©eRightClickMíuGøph
@@ -5683,19 +5789,19 @@ HWND
 hwnd
 )
 
-152 
+154 
 POINT
  
 p
 ;
 
-153 
+155 
 	`GëCurs‹Pos
 (&
 p
 );
 
-156 
+158 
 HMENU
  
 hMíu
@@ -5703,7 +5809,7 @@ hMíu
 	`Cª©eP›upMíu
 ();
 
-159 i‡–
+161 i‡–
 Sëtögs
 ::
 	`gëIn°™˚
@@ -5711,7 +5817,7 @@ Sëtögs
 	`GøphWödowIsAOT
 () )
 
-161 ::
+163 ::
 	`AµídMíu
 (
 hMíu
@@ -5723,7 +5829,7 @@ COMM_AOT
 	`_T
 ("Always onÅop"));
 
-165 ::
+167 ::
 	`AµídMíu
 (
 hMíu
@@ -5735,37 +5841,127 @@ COMM_AOT
 	`_T
 ("Always onÅop"));
 
-178 
+180 
 	`TøckP›upMíu
 –
 hMíu
 ,
 
-179 
+181 
 TPM_RIGHTBUTTON
 ,
 
-180 
+182 
 p
 .
 x
 ,
 
-181 
+183 
 p
 .
 y
 ,
 
-183 
+185 
 hwnd
 ,
 
-184 
+186 
 NULL
 );
 
-185 
+187 
+	}
+}
+
+191 
+boﬁ
+ 
+	gWöAPI
+::
+	$InôUpd©eR©e
+(
+boﬁ
+ &
+öô
+)
+
+193 
+icou¡
+ = 1;
+
+194 
+⁄e
+ = 1001;
+
+195 
+two
+ = 1001;
+
+198 if(
+icou¡
+<10 && ++icou¡Ë 
+åue
+;
+
+200 if(
+⁄e
+>1000)
+
+201 
+⁄e
+ = 
+Lib
+::
+	`SysMûliSec⁄ds
+();
+
+202 i‡(
+two
+>1000)
+
+203 
+two
+ = 
+Lib
+::
+	`SysMûliSec⁄ds
+();
+
+207 
+øã
+;
+
+208 
+øã
+ = (
+two
+>
+⁄e
+) ?Åwo-one : one -Åwo;
+
+209 
+Sëtögs
+::
+	`gëIn°™˚
+()->
+	`£tCÆcUpd©eR©e
+(
+øã
+);
+
+210 
+öô
+ = 
+Ál£
+;
+
+213  
+åue
+;
+
+214 
 	}
 }
 
@@ -5949,7 +6145,15 @@ HWND
 hwnd
 );
 
-39 
+40 
+boﬁ
+ 
+	`InôUpd©eR©e
+(boﬁ &
+öô
+);
+
+41 
 	}
 }
 
@@ -6007,53 +6211,61 @@ hwnd
 	~"Gøph.h
 "
 
-15 
+16 #i‚de‡
+__LITE__
+
+
+17 
 	~"Exp‹t.h
 "
 
-16 
+18 
 	~"Web.h
 "
 
-17 
+19 
 	~"IO.h
 "
 
-19 
+22 
 I≈utH™dÀr
  
 	göput
 ;
 
-20 
+23 
 Gøph
  
 	ggøph
 ;
 
-21 
+24 #i‚de‡
+__LITE__
+
+
+25 
 Exp‹t
  
 	gcsv
 ;
 
-25 c⁄° 
+29 c⁄° 
 	gKPS_TIMER
  = 1;
 
-26 c⁄° 
+30 c⁄° 
 	gGRAPH_TIMER
  = 2;
 
-27 c⁄° 
-	gCSV_TIMER
+31 c⁄° 
+	gCALC_TIMER
  = 3;
 
-28 c⁄° 
-	gCALC_TIMER
+32 c⁄° 
+	gCSV_TIMER
  = 4;
 
-31 
+35 
 HBITMAP
  
 	ggøph_bg
@@ -6063,17 +6275,17 @@ LﬂdImage
 _T
 ("bg.bmp"),
 
-32 
+36 
 IMAGE_BITMAP
 ,0,0,
 
-33 
+37 
 LR_CREATEDIBSECTION
 |
 LR_LOADFROMFILE
 );
 
-36 
+40 
 LRESULT
  
 CALLBACK
@@ -6097,23 +6309,23 @@ LPARAM
 lP¨am
 )
 
-38 
+42 
 msg
 )
 
-40 
+44 
 WM_TIMER
 :
 
-41 
+45 
 wP¨am
 )
 
-43 
+47 
 KPS_TIMER
 :
 
-44 
+48 
 	`InvÆid©eRe˘
 (
 hwnd
@@ -6123,11 +6335,15 @@ NULL
 FALSE
 );
 
-46 
+50 #i‚de‡
+__LITE__
+
+
+51 
 CSV_TIMER
 :
 
-47 if(
+52 if(
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6135,41 +6351,41 @@ Sëtögs
 	`gëGíî©eCSV
 ())
 
-49 
+54 
 csv
 .
 	`WrôeToCSV
 ();
 
-54 
+60 
 WM_PAINT
 :
 
-57 
+63 
 PAINTSTRUCT
  
 ps
 ;
 
-58 
+64 
 HDC
  
 Memhdc
 ;
 
-59 
+65 
 HDC
  
 hdc
 ;
 
-60 
+66 
 HBITMAP
  
 Membôm≠
 ;
 
-61 
+67 
 hdc
  = 
 	`BegöPaöt
@@ -6179,7 +6395,7 @@ hwnd
 ps
 );
 
-62 
+68 
 Memhdc
  = 
 	`Cª©eCom∑tibÀDC
@@ -6187,7 +6403,7 @@ Memhdc
 hdc
 );
 
-63 
+69 
 Membôm≠
  = 
 	`Cª©eCom∑tibÀBôm≠
@@ -6195,7 +6411,7 @@ Membôm≠
 hdc
 , 265, 265);
 
-64 
+70 
 	`Sñe˘Obje˘
 (
 Memhdc
@@ -6203,7 +6419,7 @@ Memhdc
 Membôm≠
 );
 
-66 
+72 
 Døw
 ::
 	`ãxt
@@ -6221,7 +6437,7 @@ hF⁄t_l
 kps_txt
 );
 
-67 
+73 
 Døw
 ::
 	`ãxt
@@ -6239,7 +6455,7 @@ hF⁄t_s
 max_txt
 );
 
-68 
+74 
 Døw
 ::
 	`ãxt
@@ -6261,7 +6477,7 @@ hF⁄t_l
 	`c_°r
 ());
 
-69 
+75 
 Døw
 ::
 	`ãxt
@@ -6283,7 +6499,7 @@ hF⁄t_s
 	`c_°r
 ());
 
-71 i‡–
+77 i‡–
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6291,7 +6507,7 @@ Sëtögs
 	`TŸÆKeysOn
 () )
 
-73 
+79 
 Døw
 ::
 	`ãxt
@@ -6309,7 +6525,7 @@ hF⁄t_s
 tŸ_txt
 );
 
-74 
+80 
 Døw
 ::
 	`ãxt
@@ -6331,37 +6547,37 @@ hF⁄t_s
 	`c_°r
 ());
 
-77 
+83 
 	`BôB…
 (
 hdc
 , 0, 0,
 
-80 
+86 
 Memhdc
 , 0, 0, 
 SRCCOPY
 );
 
-82 
+88 
 	`DñëeObje˘
 (
 Membôm≠
 );
 
-83 
+89 
 	`DñëeDC
  (
 Memhdc
 );
 
-84 
+90 
 	`DñëeDC
  (
 hdc
 );
 
-85 
+91 
 	`EndPaöt
 (
 hwnd
@@ -6369,15 +6585,15 @@ hwnd
 ps
 );
 
-90 
+96 
 WM_ERASEBKGND
 :
 
-93 
+99 
 WM_CONTEXTMENU
 :
 
-95 
+101 
 WöAPI
 ::
 	`Cª©eRightClickMíuKPS
@@ -6385,7 +6601,7 @@ WöAPI
 hwnd
 );
 
-98 
+104 
 	`Po°Mesßge
 (
 hwnd
@@ -6393,11 +6609,11 @@ hwnd
 WM_NULL
 , 0, 0);
 
-103 
+109 
 WM_COMMAND
 :
 
-106 
+112 
 WORD
  
 comm™d
@@ -6407,15 +6623,15 @@ comm™d
 wP¨am
 );
 
-108 
+114 
 comm™d
 )
 
-110 
+116 
 COMM_AOT
 :
 
-111 
+117 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6423,7 +6639,7 @@ Sëtögs
 	`ToggÀKPSAlwaysOnT›
 ();
 
-112 
+118 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6435,11 +6651,11 @@ hwnd
 	`KPSWödowIsAOT
 ());
 
-115 
+121 
 COMM_BORDER
 :
 
-116 
+122 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6447,7 +6663,7 @@ Sëtögs
 	`ToggÀKPSWödowB‹dîs
 ();
 
-117 
+123 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6459,11 +6675,11 @@ hwnd
 	`KPSWödowHasB‹dîs
 ());
 
-120 
+126 
 COMM_PREC
 :
 
-121 
+127 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6471,11 +6687,11 @@ Sëtögs
 	`ToggÀPªcisi⁄Mode
 ();
 
-124 
+130 
 COMM_TOT
 :
 
-125 
+131 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6483,7 +6699,7 @@ Sëtögs
 	`ToggÀTŸÆKeys
 ();
 
-126 
+132 
 	`InvÆid©eRe˘
  (
 hwnd
@@ -6493,17 +6709,21 @@ NULL
 åue
 );
 
-127 
+133 
 	`Upd©eWödow
  (
 hwnd
 );
 
-130 
+135 #i‚de‡
+__LITE__
+
+
+136 
 COMM_CSV
 :
 
-131 if(!
+137 if(!
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6511,7 +6731,7 @@ Sëtögs
 	`gëGíî©eCSV
 ())
 
-133 
+139 
 	`SëTimî
 (
 hwnd
@@ -6527,13 +6747,13 @@ Sëtögs
 NULL
 );
 
-134 
+140 
 csv
 .
 	`›íCSV
 ();
 
-138 
+144 
 	`KûlTimî
 (
 hwnd
@@ -6541,13 +6761,13 @@ hwnd
 CSV_TIMER
 );
 
-139 
+145 
 csv
 .
 	`˛o£CSV
 ();
 
-141 
+147 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6555,17 +6775,17 @@ Sëtögs
 	`ToggÀGíî©eCSV
 ();
 
-144 
+150 
 COMM_SHR
 :
 
-146 
+152 
 IO
 ::
 	`KûlThªad
 ();
 
-148 if(!
+154 if(!
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6573,7 +6793,7 @@ Sëtögs
 	`Sh¨eD©aOn
 ())
 
-151 
+157 
 IO
 ::
 	`SèπThªad
@@ -6581,7 +6801,7 @@ IO
 öput
 );
 
-153 
+159 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6589,11 +6809,11 @@ Sëtögs
 	`ToggÀSh¨eD©a
 ();
 
-156 
+162 
 COMM_DEC
 :
 
-157 
+163 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6601,11 +6821,11 @@ Sëtögs
 	`ToggÀDecimÆPoöt
 ();
 
-190 
+196 
 WM_CLOSE
 :
 
-192 
+198 
 	`KûlTimî
 (
 hwnd
@@ -6613,27 +6833,31 @@ hwnd
 KPS_TIMER
 );
 
-194 
+200 
 	`De°royWödow
 (
 hwnd
 );
 
-196 
+202 
 WM_DESTROY
 :
 
-198 
+203 #i‚de‡
+__LITE__
+
+
+205 
 IO
 ::
 	`KûlThªad
 ();
 
-199 
+207 
 	`Po°QuôMesßge
 (0);
 
-202  
+210  
 	`DefWödowProc
 (
 hwnd
@@ -6645,11 +6869,11 @@ wP¨am
 lP¨am
 );
 
-205 
+213 
 	}
 }
 
-208 
+216 
 LRESULT
  
 CALLBACK
@@ -6673,15 +6897,15 @@ LPARAM
 lP¨am
 )
 
-210 
+218 
 msg
 )
 
-212 
+220 
 WM_TIMER
 :
 
-216 
+221 
 gøph
 .
 	`addDŸ
@@ -6691,7 +6915,7 @@ gøph
 	`gëKps
 ());
 
-218 
+222 
 	`InvÆid©eRe˘
 (
 hwnd
@@ -6701,35 +6925,35 @@ NULL
 TRUE
 );
 
-223 
+225 
 WM_PAINT
 :
 
-226 
+228 
 PAINTSTRUCT
  
 ps
 ;
 
-227 
+229 
 HDC
  
 Memhdc
 ;
 
-228 
+230 
 HDC
  
 hdc
 ;
 
-229 
+231 
 HBITMAP
  
 Membôm≠
 ;
 
-230 
+232 
 hdc
  = 
 	`BegöPaöt
@@ -6739,7 +6963,7 @@ hwnd
 ps
 );
 
-231 
+233 
 Memhdc
  = 
 	`Cª©eCom∑tibÀDC
@@ -6747,7 +6971,7 @@ Memhdc
 hdc
 );
 
-232 
+234 
 Membôm≠
  = (
 HBITMAP
@@ -6761,7 +6985,7 @@ IMAGE_BITMAP
 LR_DEFAULTSIZE
 );
 
-233 
+235 
 	`Sñe˘Obje˘
 (
 Memhdc
@@ -6769,7 +6993,7 @@ Memhdc
 Membôm≠
 );
 
-236 
+238 
 Døw
 ::
 	`gøph
@@ -6781,13 +7005,13 @@ gøph
 	`gëDŸPå
 ());
 
-238 
+240 
 	`BôB…
 (
 hdc
 , 0, 0,
 
-239 
+241 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6795,7 +7019,7 @@ Sëtögs
 	`gëGøphWidth
 (),
 
-240 
+242 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6803,31 +7027,31 @@ Sëtögs
 	`gëGøphHeight
 ()+7,
 
-241 
+243 
 Memhdc
 , 0, 0, 
 SRCCOPY
 );
 
-243 
+245 
 	`DñëeObje˘
 (
 Membôm≠
 );
 
-244 
+246 
 	`DñëeDC
  (
 Memhdc
 );
 
-245 
+247 
 	`DñëeDC
  (
 hdc
 );
 
-246 
+248 
 	`EndPaöt
 (
 hwnd
@@ -6835,15 +7059,15 @@ hwnd
 ps
 );
 
-249 
+251 
 WM_ERASEBKGND
 :
 
-252 
+254 
 WM_CONTEXTMENU
 :
 
-254 
+256 
 WöAPI
 ::
 	`Cª©eRightClickMíuGøph
@@ -6851,7 +7075,7 @@ WöAPI
 hwnd
 );
 
-257 
+259 
 	`Po°Mesßge
 (
 hwnd
@@ -6859,11 +7083,11 @@ hwnd
 WM_NULL
 , 0, 0);
 
-262 
+264 
 WM_COMMAND
 :
 
-265 
+267 
 WORD
  
 comm™d
@@ -6873,15 +7097,15 @@ comm™d
 wP¨am
 );
 
-267 
+269 
 comm™d
 )
 
-269 
+271 
 COMM_AOT
 :
 
-270 
+272 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6889,7 +7113,7 @@ Sëtögs
 	`ToggÀGøphAlwaysOnT›
 ();
 
-271 
+273 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6901,11 +7125,11 @@ hwnd
 	`GøphWödowIsAOT
 ());
 
-274 
+276 
 COMM_BORDER
 :
 
-275 
+277 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6913,7 +7137,7 @@ Sëtögs
 	`ToggÀGøphWödowB‹dîs
 ();
 
-276 
+278 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -6925,11 +7149,11 @@ hwnd
 	`GøphWödowHasB‹dîs
 ());
 
-284 
+286 
 WM_CLOSE
 :
 
-286 
+288 
 	`KûlTimî
 (
 hwnd
@@ -6937,27 +7161,31 @@ hwnd
 GRAPH_TIMER
 );
 
-288 
+290 
 	`De°royWödow
 (
 hwnd
 );
 
-290 
+292 
 WM_DESTROY
 :
 
-292 
+293 #i‚de‡
+__LITE__
+
+
+295 
 IO
 ::
 	`KûlThªad
 ();
 
-293 
+297 
 	`Po°QuôMesßge
 (0);
 
-296  
+300  
 	`DefWödowProc
 (
 hwnd
@@ -6969,11 +7197,11 @@ wP¨am
 lP¨am
 );
 
-299 
+303 
 	}
 }
 
-301 
+305 
 VOID
  
 CALLBACK
@@ -6997,13 +7225,23 @@ DWORD
 dwTime
 )
 
-303 
-Lib
-::
-	`PrötTimeSèmp
-();
+308 
+boﬁ
+ 
+öô
+ = 
+åue
+;
 
-305 i‡(
+309 i‡(
+öô
+ && 
+WöAPI
+::
+	`InôUpd©eR©e
+(init)) {}
+
+311 i‡(
 Sëtögs
 ::
 	`gëIn°™˚
@@ -7011,19 +7249,23 @@ Sëtögs
 	`Pªcisi⁄ModeOn
 ())
 
-307 
+313 
 öput
 .
 	`ˇlcuœã_kps_¥ec
 ();
 
-311 
+317 
 öput
 .
 	`ˇlcuœã_kps_≠r
 ();
 
-314 if(
+319 #i‚de‡
+__LITE__
+
+
+320 if(
 Sëtögs
 ::
 	`gëIn°™˚
@@ -7031,7 +7273,7 @@ Sëtögs
 	`gëGíî©eCSV
 ())
 
-316 
+322 
 csv
 .
 	`Upd©eAvîage
@@ -7041,7 +7283,7 @@ csv
 	`gëKps
 ());
 
-319 if(
+325 if(
 Sëtögs
 ::
 	`gëIn°™˚
@@ -7049,7 +7291,7 @@ Sëtögs
 	`Sh¨eD©aOn
 ())
 
-321 
+327 
 IO
 ::
 	`AddKps
@@ -7059,11 +7301,11 @@ IO
 	`gëKps
 ());
 
-323 
+330 
 	}
 }
 
-326 
+333 
 LRESULT
  
 CALLBACK
@@ -7081,21 +7323,21 @@ LPARAM
 lP¨am
 )
 
-328 i‡(
+335 i‡(
 nCode
  =
 HC_ACTION
 )
 
-330 
+337 
 wP¨am
 )
 
-332 
+339 
 WM_KEYDOWN
 :
 
-333 
+340 
 KBDLLHOOKSTRUCT
  *
 kbdSåu˘
@@ -7103,7 +7345,7 @@ kbdSåu˘
 lP¨am
 ;
 
-335 i‡–
+342 i‡–
 	`GëAsyncKeySèã
 (
 kbdSåu˘
@@ -7111,13 +7353,13 @@ kbdSåu˘
 vkCode
 ) >= 0 )
 
-337 
+344 
 öput
 .
 	`keydown
 ();
 
-341 i‡–
+348 i‡–
 kbdSåu˘
 ->
 vkCode
@@ -7125,13 +7367,13 @@ vkCode
 VK_OEM_3
  )
 
-343 
+350 
 öput
 .
 	`Re£tMaxKps
 ();
 
-348  
+355  
 	`CÆlNextHookEx
 (
 NULL
@@ -7143,11 +7385,11 @@ wP¨am
 lP¨am
 );
 
-349 
+356 
 	}
 }
 
-351 
+358 
 WINAPI
  
 	$WöMaö
@@ -7159,7 +7401,7 @@ hIn°™˚
 hPªvIn°™˚
 ,
 
-352 
+359 
 LPSTR
  
 ÕCmdLöe
@@ -7167,7 +7409,7 @@ LPSTR
 nCmdShow
 )
 
-354 
+361 
 WNDCLASSEX
  
 wc
@@ -7175,7 +7417,7 @@ wc
 wc2
 ;
 
-355 
+362 
 HWND
  
 hwnd
@@ -7183,13 +7425,13 @@ hwnd
 hwnd2
 ;
 
-356 
+363 
 MSG
  
 Msg
 ;
 
-359 
+366 
 wödowInf‹m©i⁄
  
 	`wi_1
@@ -7201,7 +7443,7 @@ NULL
 WndProcPrim
 );
 
-361 if(!
+368 if(!
 WöAPI
 ::
 	`MakeWödow
@@ -7217,7 +7459,7 @@ hIn°™˚
 wi_1
 ))
 
-366 
+373 
 	`ShowWödow
 (
 hwnd
@@ -7225,13 +7467,13 @@ hwnd
 nCmdShow
 );
 
-367 
+374 
 	`Upd©eWödow
 (
 hwnd
 );
 
-370 
+377 
 wödowInf‹m©i⁄
  
 	`wi_2
@@ -7243,7 +7485,7 @@ Sëtögs
 	`gëGøphWidth
 (),
 
-371 
+378 
 Sëtögs
 ::
 	`gëIn°™˚
@@ -7251,13 +7493,13 @@ Sëtögs
 	`gëGøphHeight
 ()+40,
 
-372 
+379 
 g_szCœssName2
 , "Gøph", "bg.bmp", 
 WndProcSec
 );
 
-374 if(!
+381 if(!
 WöAPI
 ::
 	`MakeWödow
@@ -7273,7 +7515,7 @@ hIn°™˚
 wi_2
 ))
 
-378 
+385 
 	`ShowWödow
 (
 hwnd2
@@ -7281,13 +7523,13 @@ hwnd2
 nCmdShow
 );
 
-379 
+386 
 	`Upd©eWödow
 (
 hwnd2
 );
 
-382 
+389 
 	`SëWödowsHookEx
 (
 WH_KEYBOARD_LL
@@ -7295,7 +7537,7 @@ WH_KEYBOARD_LL
 MyKeybﬂrdProc
 , 0, 0);
 
-385 
+392 
 Gdùlus
 ::
 GdùlusSèπupI≈ut
@@ -7303,13 +7545,13 @@ GdùlusSèπupI≈ut
 gdùlusSèπupI≈ut
 ;
 
-386 
+393 
 ULONG_PTR
  
 gdùlusTokí
 ;
 
-387 
+394 
 Gdùlus
 ::
 	`GdùlusSèπup
@@ -7321,49 +7563,7 @@ gdùlusSèπupI≈ut
 NULL
 );
 
-389 
-°d
-::
-cout
- << 
-Sëtögs
-::
-	`gëIn°™˚
-()->
-	`gëCÆcWöUpd©eR©e
-(Ë<< std::
-ídl
-;
-
-390 
-°d
-::
-cout
- << 
-Sëtögs
-::
-	`gëIn°™˚
-()->
-	`gëGøphUpd©eR©e
-(Ë<< std::
-ídl
-;
-
-391 
-°d
-::
-cout
- << 
-Sëtögs
-::
-	`gëIn°™˚
-()->
-	`gëCÆcUpd©eR©e
-(Ë<< std::
-ídl
-;
-
-394 
+397 
 	`SëTimî
 (
 hwnd
@@ -7379,7 +7579,7 @@ Sëtögs
 NULL
 );
 
-395 
+398 
 	`SëTimî
 (
 hwnd2
@@ -7395,7 +7595,7 @@ Sëtögs
 NULL
 );
 
-396 
+399 
 	`SëTimî
 (
 hwnd
@@ -7411,7 +7611,7 @@ Sëtögs
 CÆcTimîCÆlback
 );
 
-399 
+402 
 	`GëMesßge
 (&
 Msg
@@ -7419,25 +7619,25 @@ Msg
 NULL
 , 0, 0) > 0)
 
-401 
+404 
 	`Tøn¶©eMesßge
 (&
 Msg
 );
 
-402 
+405 
 	`Di•©chMesßge
 (&
 Msg
 );
 
-405  
+408  
 Msg
 .
 wP¨am
 ;
 
-406 
+409 
 	}
 }
 
@@ -7791,11 +7991,7 @@ WrôeToCSV
 tŸÆ
  = 0;
 
-21 
-	mdiv
- = 1;
-
-22 
+21 
 	m°d
 ::
 of°ªam
@@ -8415,7 +8611,11 @@ SysTimeSèmp
 °r
 );
 
-11 
+11 
+SysMûliSec⁄ds
+();
+
+12 
 PrötTimeSèmp
 ();
 
@@ -8436,14 +8636,10 @@ SETTINGS_H_INCLUDED
 "
 
 5 
-	~<utûôy
->
-
-6 
 	~<°rög
 >
 
-8 ˛as†
+7 ˛as†
 	cSëtögs
  : 
 public
@@ -8451,25 +8647,25 @@ public
 WödowI¡îÁ˚
 
 
-10 
+9 
 ¥iv©e
 :
 
-11 
+10 
 Sëtögs
 * 
 ö°™˚
 ;
 
-13 
+12 
 Sëtögs
 ();
 
-14 ~
+13 ~
 Sëtögs
 ();
 
-17 
+16 
 boﬁ
  
 	mb_kps_Æways_⁄_t›
@@ -8477,7 +8673,7 @@ boﬁ
 Ál£
 ;
 
-18 
+17 
 boﬁ
  
 	mb_kps_wödow_has_b‹dîs
@@ -8485,7 +8681,7 @@ boﬁ
 åue
 ;
 
-19 
+18 
 boﬁ
  
 	mb_kps_tŸÆ_keys_⁄
@@ -8493,7 +8689,7 @@ boﬁ
 åue
 ;
 
-20 
+19 
 boﬁ
  
 	mb_kps_¥ecisi⁄_mode
@@ -8501,7 +8697,7 @@ boﬁ
 åue
 ;
 
-21 
+20 
 boﬁ
  
 	mb_kps_decimÆ_poöt
@@ -8509,7 +8705,7 @@ boﬁ
 Ál£
 ;
 
-24 
+23 
 boﬁ
  
 	mb_gøph_Æways_⁄_t›
@@ -8517,7 +8713,7 @@ boﬁ
 Ál£
 ;
 
-25 
+24 
 boﬁ
  
 	mb_gøph_wödow_has_b‹dîs
@@ -8525,19 +8721,19 @@ boﬁ
 åue
 ;
 
-28 
+27 
 	mˇlc_queue_size
  = 20;
 
-29 
+28 
 	mˇlc_upd©e_øã
  = 50;
 
-30 
+29 
 	mˇlc_wö_upd©e_øã
  = 50;
 
-33 
+32 
 boﬁ
  
 	mb_gíî©e_csv
@@ -8545,11 +8741,11 @@ boﬁ
 Ál£
 ;
 
-34 
+33 
 	mcsv_upd©e_øã
  = 5000;
 
-37 
+36 
 boﬁ
  
 	mb_sh¨e_d©a
@@ -8557,31 +8753,31 @@ boﬁ
 Ál£
 ;
 
-38 
+37 
 	msh¨e_upd©e_øã
  = 1000;
 
-41 
+40 
 	mgøph_upd©e_øã
  = 350;
 
-42 
+41 
 	mgøph_¥ecisi⁄
  = 150;
 
-43 
+42 
 	mgøph_width
  = 400;
 
-44 
+43 
 	mgøph_height
  = 225;
 
-45 
+44 
 	mgøph_t›
  = 65;
 
-47 
+46 
 	m°d
 ::
 °rög
@@ -8589,11 +8785,11 @@ boﬁ
 u£r
  = "guest";
 
-49 
+48 
 RódSëtögs
 ();
 
-50 
+49 
 SëRódVÆue
 (
 °d
@@ -8601,117 +8797,123 @@ SëRódVÆue
 ∑ú
 <°d::
 °rög
-, > 
+, std::°rög> 
 vÆ
 );
 
-52 
+51 
 	mpublic
 :
 
-53 
+52 
 Sëtögs
 * 
 gëIn°™˚
 ();
 
-56 
+55 
 ToggÀKPSAlwaysOnT›
 ();
 
-57 
+56 
 boﬁ
  
 KPSWödowIsAOT
 ();
 
-59 
+58 
 ToggÀGøphAlwaysOnT›
 ();
 
-60 
+59 
 boﬁ
  
 GøphWödowIsAOT
 ();
 
-63 
+62 
 ToggÀKPSWödowB‹dîs
 ();
 
-64 
+63 
 boﬁ
  
 KPSWödowHasB‹dîs
 ();
 
-66 
+65 
 ToggÀGøphWödowB‹dîs
 ();
 
-67 
+66 
 boﬁ
  
 GøphWödowHasB‹dîs
 ();
 
-70 
+69 
 ToggÀPªcisi⁄Mode
 ();
 
-71 
+70 
 boﬁ
  
 Pªcisi⁄ModeOn
 ();
 
-74 
+73 
 ToggÀTŸÆKeys
 ();
 
-75 
+74 
 boﬁ
  
 TŸÆKeysOn
 ();
 
-77 
+76 
 ToggÀDecimÆPoöt
 ();
 
-78 
+77 
 boﬁ
  
 DecimÆPoötOn
 ();
 
-80 
+79 
 ToggÀGíî©eCSV
 ();
 
-81 
+80 
 boﬁ
  
 gëGíî©eCSV
 ();
 
-83 
+82 
 gëCSVUpd©eR©e
 ();
 
-85 
+84 
 ToggÀSh¨eD©a
 ();
 
-86 
+85 
 boﬁ
  
 Sh¨eD©aOn
 ();
 
-88 
+87 
 gëSh¨eUpd©eR©e
 ();
+
+89 
+£tCÆcUpd©eR©e
+(
+øã
+);
 
 90 
 gëCÆcQueueSize
@@ -9023,7 +9225,15 @@ HWND
 hwnd
 );
 
-39 
+40 
+boﬁ
+ 
+	`InôUpd©eR©e
+(boﬁ &
+öô
+);
+
+41 
 	}
 }
 

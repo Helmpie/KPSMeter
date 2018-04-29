@@ -5,14 +5,14 @@
 #include <sstream>
 #include <iostream>
 
-void Lib::SysDateTime(std::string &str)
+void Lib::Time::SysDateTime(std::string &str)
 {
     std::time_t time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     str = std::ctime(&time);
     str.pop_back();
 }
 
-void Lib::SysTime(std::string &str)
+void Lib::Time::SysTime(std::string &str)
 {
     std::time_t rawtime;
     struct tm* timeinfo;
@@ -26,7 +26,7 @@ void Lib::SysTime(std::string &str)
     str = buffer;
 }
 
-void Lib::SysTimeStamp(std::string& str)
+void Lib::Time::SysTimeStamp(std::string& str)
 {
     timeval curTime;
     gettimeofday(&curTime, NULL);
@@ -35,20 +35,20 @@ void Lib::SysTimeStamp(std::string& str)
     char buffer[4] = "";
     sprintf(buffer, ".%d", milli);
 
-    Lib::SysTime(str);
+    Lib::Time::SysTime(str);
     str += buffer;
 }
 
-int Lib::SysMilliSeconds()
+int Lib::Time::SysMilliSeconds()
 {
     timeval curTime;
     gettimeofday(&curTime, NULL);
     return curTime.tv_usec / 1000;
 }
 
-void Lib::PrintTimeStamp()
+void Lib::Time::PrintTimeStamp()
 {
     std::string str;
-    Lib::SysTimeStamp(str);
+    Lib::Time::SysTimeStamp(str);
     std::cout << str << std::endl;
 }

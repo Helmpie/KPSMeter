@@ -1,4 +1,3 @@
-// todo: write better read function
 graph_update_rate = 350
 graph_precision = 200
 graph_width = 800
@@ -11,3 +10,4 @@ calc_update_rate = 50
 calc_win_update_rate = 100
 share_update_rate = 1000
 user = Guest
+font = Bahnschrift Light

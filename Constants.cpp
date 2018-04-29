@@ -6,9 +6,9 @@ const COLORREF colorWhite = RGB(255, 255, 255);
 const COLORREF colorBlack = RGB(0, 0, 0);
 
 const HFONT hFont_l = CreateFont(70, 0, 0, 0, FW_BOLD, 0, 0, 0, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
-                        CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_SWISS, _T("Bahnschrift Light"));
+                        CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_SWISS, _T(Settings::getInstance()->getFont().c_str()));
 const HFONT hFont_s = CreateFont(40, 0, 0, 0, FW_BOLD, 0, 0, 0, DEFAULT_CHARSET, OUT_OUTLINE_PRECIS,
-                        CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_SWISS, _T("Bahnschrift Light"));
+                        CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, DEFAULT_PITCH | FF_SWISS, _T(Settings::getInstance()->getFont().c_str()));
 
 const char* kps_txt = "kps: ";
 const char* max_txt = "max: ";

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1524838465 source:c:\users\hein\documents\codeblocks projects\kps\drawfunctions.cpp
+1525030765 source:c:\users\hein\documents\codeblocks projects\kps\drawfunctions.cpp
 	"DrawFunctions.h"
 	<windows.h>
 	<Gdiplus.h>
@@ -15,7 +15,7 @@
 	<deque>
 	<gdiplus.h>
 
-1525003717 c:\users\hein\documents\codeblocks projects\kps\settings.h
+1525030512 c:\users\hein\documents\codeblocks projects\kps\settings.h
 	"WindowInterface.h"
 	<string>
 
@@ -49,7 +49,7 @@
 	<iostream>
 	<cmath>
 
-1525011614 source:c:\users\hein\documents\codeblocks projects\kps\settings.cpp
+1525030295 source:c:\users\hein\documents\codeblocks projects\kps\settings.cpp
 	"Settings.h"
 	"WindowInterface.h"
 	<iostream>
@@ -61,7 +61,7 @@
 	<string>
 	"Settings.h"
 
-1524950530 source:c:\users\hein\documents\codeblocks projects\kps\export.cpp
+1525030864 source:c:\users\hein\documents\codeblocks projects\kps\export.cpp
 	"Export.h"
 	<string>
 	<iostream>
@@ -75,7 +75,7 @@
 	<string>
 	<fstream>
 
-1525011753 source:c:\users\hein\documents\codeblocks projects\kps\main.cpp
+1525012927 source:c:\users\hein\documents\codeblocks projects\kps\main.cpp
 	<iostream>
 	<windows.h>
 	<stdio.h>
@@ -114,7 +114,7 @@
 1524866891 c:\users\hein\documents\codeblocks projects\kps\web.h
 	"Inet.h"
 
-1525002805 source:c:\users\hein\documents\codeblocks projects\kps\web.cpp
+1525030874 source:c:\users\hein\documents\codeblocks projects\kps\web.cpp
 	"Web.h"
 	<sstream>
 	<string>
@@ -139,14 +139,14 @@
 	<windows.h>
 	<gdiplus.h>
 
-1524838257 source:c:\users\hein\documents\codeblocks projects\kps\constants.cpp
+1525030326 source:c:\users\hein\documents\codeblocks projects\kps\constants.cpp
 	"Constants.h"
 	"Settings.h"
 
-1524948727 c:\users\hein\documents\codeblocks projects\kps\lib.h
+1525030858 c:\users\hein\documents\codeblocks projects\kps\lib.h
 	<string>
 
-1524948727 source:c:\users\hein\documents\codeblocks projects\kps\lib.cpp
+1525030871 source:c:\users\hein\documents\codeblocks projects\kps\lib.cpp
 	"Lib.h"
 	<chrono>
 	<sys/time.h>

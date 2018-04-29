@@ -2,7 +2,6 @@
 #define SETTINGS_H_INCLUDED
 
 #include "WindowInterface.h"
-#include <utility>
 #include <string>
 
 class Settings : public WindowInterface
@@ -47,7 +46,7 @@ class Settings : public WindowInterface
         std::string user = "guest";
 
         void ReadSettings();
-        void SetReadValue(std::pair<std::string, short> val);
+        void SetReadValue(std::pair<std::string, std::string> val);
 
     public:
         static Settings* getInstance();

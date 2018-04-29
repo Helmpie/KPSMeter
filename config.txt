@@ -10,3 +10,4 @@ calc_queue_size = 20
 calc_update_rate = 50
 calc_win_update_rate = 100
 share_update_rate = 1000
+user = Guest

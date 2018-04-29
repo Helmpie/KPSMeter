@@ -3,7 +3,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <utility>
 
 Settings* Settings::instance = 0;
 
@@ -39,9 +38,9 @@ void Settings::ReadSettings()
             {
                 size_t pos = line.find(" = ");
 
-                std::pair<std::string, short> val;
+                std::pair<std::string, std::string> val;
                 val.first = line.substr(0, pos);
-                val.second = std::atoi(line.substr(pos+2).c_str());
+                val.second = line.substr(pos+3);
 
                 SetReadValue(val);
             }
@@ -55,30 +54,32 @@ void Settings::ReadSettings()
     file_ini.close();
 }
 
-void Settings::SetReadValue(std::pair<std::string, short> val)
+void Settings::SetReadValue(std::pair<std::string, std::string> val)
 {
+    std::cout << val.first << " " << val.second << std::endl;
+
     if (val.first == "graph_update_rate")
-        graph_update_rate = val.second;
+        graph_update_rate = std::atoi((val.second).c_str());
     else if (val.first == "graph_precision")
-        graph_precision = val.second;
+        graph_precision = std::atoi((val.second).c_str());
     else if (val.first ==  "graph_width")
-        graph_width = val.second;
+        graph_width = std::atoi((val.second).c_str());
     else if (val.first ==  "graph_height")
-        graph_height = val.second;
+        graph_height = std::atoi((val.second).c_str());
     else if (val.first ==  "graph_top")
-        graph_top = val.second;
+        graph_top = std::atoi((val.second).c_str());
     else if (val.first ==  "generate_csv")
-        b_generate_csv = val.second;
+        b_generate_csv = std::atoi((val.second).c_str());
     else if (val.first ==  "csv_update_rate")
-        csv_update_rate = val.second;
+        csv_update_rate = std::atoi((val.second).c_str());
     else if (val.first ==  "calc_queue_size")
-        calc_queue_size = val.second;
+        calc_queue_size = std::atoi((val.second).c_str());
     else if (val.first == "calc_update_rate")
-        calc_update_rate = val.second;
+        calc_update_rate = std::atoi((val.second).c_str());
     else if (val.first ==  "calc_win_update_rate")
-        calc_win_update_rate  = val.second;
+        calc_win_update_rate  = std::atoi((val.second).c_str());
     else if (val.first == "share_update_rate")
-        share_update_rate = val.second;
+        share_update_rate = std::atoi((val.second).c_str());
     else if (val.first == "user")
         user = val.second;
     else

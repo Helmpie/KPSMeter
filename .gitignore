@@ -1,5 +1,4 @@
 *.o
-*.exe
 *.cscope_file_list
 *.depend
 *.layout
